@@ -1,0 +1,52 @@
+{#- ===========================================================================
+   Arcanum Site Kit (ASK) v2.0 — adapters/jinja_triad.html.j2
+   SERVER-RENDERED Research Triad for Jinja stacks (gerhard, lewis, leonid,
+   starcruiser, leontief, methodex, freenic). Renders the triad directly from a
+   `cdf` mapping (this site's ecosystem.json entry's `cdf` block) so it is visible
+   with NO JS and there is no hydration flash. ark-triad.js still enhances it
+   (click telemetry) when present, and hydrates the footer's Website-source / Cite.
+
+   Usage — pass the cdf block into the template context, then include:
+       (in your view)  cdf = ecosystem["sites"][key]["cdf"]
+       (in your base)  {% raw %}{% include "_shared/adapters/jinja_triad.html.j2" %}{% endraw %}
+
+   Renders nothing if `cdf` is undefined/null (graceful no-op for a not-yet-migrated
+   site). Order fixed: Data · Code · Outputs. Data/Code primary, Outputs secondary.
+=========================================================================== -#}
+{%- macro _fmts(items) -%}
+  {%- set m = {"csv": "CSV", "xlsx": "XLSX", "parquet": "Parquet", "zip": "ZIP"} -%}
+  {%- for it in items -%}{{ m.get(it | lower, it) }}{% if not loop.last %}, {% endif %}{%- endfor -%}
+{%- endmacro -%}
+{%- macro _langs(items) -%}
+  {%- set m = {"python": "Python", "r": "R", "typescript": "TypeScript", "javascript": "JavaScript", "sql": "SQL", "stata": "Stata", "julia": "Julia"} -%}
+  {%- for it in items -%}{{ m.get(it | lower, it) }}{% if not loop.last %} + {% endif %}{%- endfor -%}
+{%- endmacro -%}
+{%- if cdf %}
+{%- set d = cdf.data %}{%- set c = cdf.code %}{%- set o = cdf.outputs %}
+<section class="ark-triad" data-ark-triad aria-label="Get the data and the code for this research">
+  <a class="ark-triad-btn ark-triad-data" data-cdf="data" href="{{ d.href }}" aria-label="Download the data for this site">
+    <span class="ark-triad-icon" aria-hidden="true">&#8595;</span>
+    <span class="ark-triad-text">
+      <span class="ark-triad-label">Download the Data</span>
+      <span class="ark-triad-sub" data-cdf-sub="data">
+        {%- if d.size %}{{ d.size }} &middot; {% endif %}{{ _fmts(d.formats or []) }}
+        {%- if d.bulk and d.bulk.size %} &middot; bulk {{ d.bulk.size }} &rarr;{% endif -%}
+      </span>
+    </span>
+  </a>
+  <a class="ark-triad-btn ark-triad-code" data-cdf="code" href="{{ c.href }}" aria-label="Download the research code for this site">
+    <span class="ark-triad-icon" aria-hidden="true">&#8595;</span>
+    <span class="ark-triad-text">
+      <span class="ark-triad-label">Download the Code</span>
+      <span class="ark-triad-sub" data-cdf-sub="code">{{ _langs(c.langs or []) }}{% if c.license %} &middot; {{ c.license }}{% endif %}</span>
+    </span>
+  </a>
+  <a class="ark-triad-btn ark-triad-outputs ark-triad-secondary" data-cdf="outputs" href="{{ o.href }}" aria-label="Explore the finished outputs of this site">
+    <span class="ark-triad-icon" aria-hidden="true">&#8594;</span>
+    <span class="ark-triad-text">
+      <span class="ark-triad-label">Explore the Outputs</span>
+      <span class="ark-triad-sub" data-cdf-sub="outputs">{{ o.label | default("", true) }}</span>
+    </span>
+  </a>
+</section>
+{%- endif -%}

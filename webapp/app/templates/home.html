@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block description %}Methodex is a public-domain layer for economic-methodology history — the cited, dated construction-and-revision record of every US-federal statistic, browsable on the web and queryable by agents over a 13-tool MCP API at mcp.methodex.fyi.{% endblock %}
+{% block content %}
+<main class="content">
+  <section class="hero">
+    <div class="container">
+      <h1>How was it measured <em>then</em>?</h1>
+      <p class="lede">
+        Methodex is a <strong>"Context7 for economic methodology"</strong> — the
+        construction-and-revision history of every economic statistic, with
+        citations to the governing manual edition in force at any date.
+      </p>
+
+      <div class="killer">
+        <div class="killer-q">
+          <span class="badge">The killer query</span>
+          <p>"How was U.S. GDP measured in 1985 vs 2015 — and what changed?"</p>
+          <p class="killer-a">
+            Methodex answers with the governing handbook edition for each year and
+            the cited revision events in between — cross-linked to the data vintage.
+          </p>
+        </div>
+      </div>
+
+      <!-- CODE & DATA FIRST — the Research Triad (kit v2.0, server-rendered from
+           ecosystem cdf) BESIDE the agent-first MCP centerpiece card (MXF-1). -->
+      <div class="mx-hero-actions">
+        <div class="mx-triad-wrap">
+          {% include "_shared/triad.html" %}
+        </div>
+
+        {% if cdf and cdf.mcp %}
+        <aside class="mx-mcp-card" data-cdf="mcp" aria-label="Connect via MCP">
+          <div class="mx-mcp-top">
+            <span class="mx-mcp-badge">Agents</span>
+            <h2 class="mx-mcp-title">{{ cdf.mcp.label }}</h2>
+          </div>
+          <p class="mx-mcp-endpoint">
+            <code class="mx-mcp-mono" data-copy="{{ cdf.mcp.endpoint }}">{{ cdf.mcp.endpoint }}</code>
+          </p>
+          <p class="mx-mcp-line">
+            {{ cdf.mcp.tools }} tools over Streamable-HTTP MCP. Point your LLM at this
+            endpoint and query methodology directly — the killer query is a tool:
+            <code>get_methodology</code>.
+          </p>
+          <p class="mx-mcp-sub">Streamable-HTTP · {{ cdf.mcp.tools }} tools · public-domain layer</p>
+          <a class="btn small" href="/code">Connection snippet &rarr;</a>
+        </aside>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-strip">
+    <div class="container grid-4">
+      <div class="stat"><span class="num">{{ n_documents }}</span><span class="lbl">public documents</span></div>
+      <div class="stat"><span class="num">{{ n_events }}</span><span class="lbl">cited revision events</span></div>
+      <div class="stat"><span class="num">{{ n_statistics }}</span><span class="lbl">statistics catalogued</span></div>
+      <div class="stat"><span class="num">{{ n_verified }}</span><span class="lbl">adversarially verified</span></div>
+    </div>
+    <p class="container muted" style="margin-top:6px;font-size:.86rem;">
+      {{ n_statistics_live }} statistics with served revision-event data · {{ n_statistics }} catalogued.
+    </p>
+  </section>
+
+  <section class="container">
+    <h2>Where the methodology changed most</h2>
+    <p class="muted" style="max-width:74ch;">
+      The {{ n_statistics_live }} statistics with cited revision histories, ranked
+      by the number of <strong>methodology revision events</strong> on record — the
+      statistics whose construction has been redefined most often. Live from the
+      public-domain store; every bar is a real, cited count.
+    </p>
+    <div id="coverage_chart" class="ark-chart" style="min-height:420px;">
+      <div class="ark-chart-loading">Loading coverage chart…</div>
+    </div>
+    <p class="ark-chart-meta">
+      Source: <code>/api/coverage</code> (live roll-up of the public revision-event
+      store). Drawn with vendored Plotly — no CDN, no external call.
+    </p>
+  </section>
+
+  <section class="container prose">
+    <h2>Built for the data scientist</h2>
+    <p>
+      Every view on this site offers a <strong>data download</strong> (CSV)
+      and a <strong>view-the-code</strong> link. Pick a statistic, read its
+      revision timeline as an interactive chart, and pull the exact events behind
+      it as a machine-readable file.
+    </p>
+
+    <div class="card-grid">
+      <a class="card" href="/explore">
+        <h3>Methodology Explorer</h3>
+        <p>Search or browse {{ n_statistics_live }} statistics with cited revision
+           histories. Each renders an interactive Plotly timeline of its
+           methodology changes plus the governing documents.</p>
+      </a>
+      <a class="card" href="/docs">
+        <h3>Public Documents</h3>
+        <p>The {{ n_documents }} public-domain governing manuals, handbooks, and
+           releases — US-federal-government works, servable verbatim.</p>
+      </a>
+      <a class="card" href="/download/bundle.zip">
+        <h3>Bulk Data</h3>
+        <p>One ZIP: statistics, revision events, and documents as CSV,
+           with a README and the public-only license note.</p>
+      </a>
+    </div>
+
+    <h2>The public-only guarantee</h2>
+    <p>
+      The full Methodex corpus mixes public-domain US-federal material with
+      in-copyright international / academic sources. <strong>This hosted instance
+      runs with <code>METHODEX_PUBLIC_ONLY=1</code></strong>: the in-memory stores
+      are filtered once at load to public-domain documents and their events, so
+      every page, API call, and download serves <em>only</em> the
+      <a href="/about">public-domain layer</a>. Legal basis: 17 U.S.C. §105.
+    </p>
+  </section>
+</main>
+{% endblock %}
+
+{% block body_scripts %}
+<script>
+// Landing default chart — top statistics by cited revision-event count.
+// Real data only: fetched live from /api/coverage (public-only store). Drawn
+// through the Arcanum Site Kit (ArkPlotly): transparent bg, accent-led colorway,
+// grid/font from the --ark-* tokens, dark-aware and re-themed on the toggle, with
+// a trimmed modebar (PNG + Download-data CSV). No CDN, no external call. The bar
+// is a single series, so the kit colorway[0] (= --ark-accent) colors it — no
+// hardcoded accent/grid/font.
+(function () {
+  var el = document.getElementById("coverage_chart");
+  if (!el || typeof Plotly === "undefined") {
+    if (el) el.innerHTML = '<div class="ark-chart-error">Chart unavailable (Plotly not loaded).</div>';
+    return;
+  }
+  fetch("/api/coverage").then(function (r) { return r.json(); }).then(function (d) {
+    var rows = (d && d.top_statistics) || [];
+    if (!rows.length) { el.innerHTML = '<div class="ark-chart-error">No coverage data.</div>'; return; }
+    rows = rows.slice().reverse();  // largest at top in a horizontal bar
+    el.innerHTML = "";
+    var traces = [{
+      type: "bar", orientation: "h",
+      x: rows.map(function (s) { return s.n_events; }),
+      y: rows.map(function (s) { return s.name; }),
+      customdata: rows.map(function (s) { return [s.statistic_id, s.family]; }),
+      hovertemplate: "<b>%{y}</b><br>%{x} revision events"
+        + "<br><i>%{customdata[0]} · %{customdata[1]}</i><extra></extra>"
+    }];
+    var layoutExtra = {
+      margin: { l: 280, r: 24, t: 8, b: 40 },
+      height: Math.max(380, 30 * rows.length + 60),
+      xaxis: { title: "cited revision events", zeroline: false },
+      yaxis: { automargin: true }
+    };
+    if (window.ArkPlotly) {
+      ArkPlotly.plot(el, traces, layoutExtra, { filename: "methodex_coverage" });
+    } else {
+      // Kit absent — plain transparent plot so the chart still renders.
+      Plotly.newPlot(el, traces, Object.assign({
+        paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)"
+      }, layoutExtra), { responsive: true, displayModeBar: false });
+    }
+  }).catch(function () {
+    el.innerHTML = '<div class="ark-chart-error">Could not load the coverage chart.</div>';
+  });
+})();
+
+// Click-to-copy the MCP endpoint string (progressive enhancement; the endpoint
+// is a copyable string, NOT a browser link — a bare GET to it is 406-by-design,
+// so the card links to /code for the connection snippet instead).
+(function () {
+  var m = document.querySelector(".mx-mcp-mono[data-copy]");
+  if (!m) return;
+  m.setAttribute("title", "Click to copy");
+  m.addEventListener("click", function () {
+    var t = m.getAttribute("data-copy") || m.textContent;
+    var done = function () {
+      var o = m.textContent; m.textContent = "copied ✓";
+      setTimeout(function () { m.textContent = o; }, 1200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(done, done);
+    } else { done(); }
+  });
+})();
+</script>
+{% endblock %}

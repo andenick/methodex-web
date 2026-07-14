@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site_title }} — {{ tagline }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ tagline }}, served from the public-domain US-federal layer.{% endblock %}">
+
+  <!-- Arcanum Site Kit (ASK) v1 — shared chrome + methodex violet theme (vendored, no CDN) -->
+  <link rel="stylesheet" href="/static/_shared/arcanum.css?v={{ asset_ver }}">
+  <link rel="stylesheet" href="/static/_shared/themes/methodex.css?v={{ asset_ver }}">
+  <link rel="icon" href="/static/_shared/favicon.svg" type="image/svg+xml">
+
+  <!-- Site stylesheet (page-body + prose layout; kit owns header/footer chrome) -->
+  <link rel="stylesheet" href="/static/css/style.css?v={{ asset_ver }}">
+
+  <!-- Plotly (vendored, no CDN). If site_data vendoring is skipped, swap to a
+       CDN <script> at deploy time. -->
+  <script src="/static/vendor/plotly.min.js"></script>
+
+  <!-- Arcanum Site Kit v1.1 — shared Plotly theming + download buttons (after plotly) -->
+  <script defer src="/static/_shared/ark-plotly.js?v={{ asset_ver }}"></script>
+  <script defer src="/static/_shared/ark-downloads.js?v={{ asset_ver }}"></script>
+  <script defer src="/static/_shared/ark-chart.js?v={{ asset_ver }}"></script>
+  <script defer src="/static/_shared/ark-table.js?v={{ asset_ver }}"></script>
+  <script defer src="/static/_shared/ark-code.js?v={{ asset_ver }}"></script>
+
+  <script defer src="/static/js/app.js?v={{ asset_ver }}"></script>
+
+  {# ------------------------------------------------------------------ #}
+  {# Umami web-analytics snippet (Layer 2 of the Carson Telemetry        #}
+  {# Standard — cookieless, privacy-friendly). Disabled until the deploy #}
+  {# fills in UMAMI_SRC + UMAMI_WEBSITE_ID (env METHODEX_UMAMI_SRC /      #}
+  {# METHODEX_UMAMI_WEBSITE_ID). Placeholder is intentionally commented   #}
+  {# so nothing loads in dev.                                            #}
+  {# ------------------------------------------------------------------ #}
+  {% if umami_src and umami_website_id %}
+  <script defer src="{{ umami_src }}" data-website-id="{{ umami_website_id }}"></script>
+  {% else %}
+  <!-- UMAMI PLACEHOLDER (Layer-2 web analytics): set env METHODEX_UMAMI_SRC
+       and METHODEX_UMAMI_WEBSITE_ID to enable. Example:
+       <script defer src="https://umami.example/script.js"
+               data-website-id="00000000-0000-0000-0000-000000000000"></script> -->
+  {% endif %}
+
+  {% block head_extra %}{% endblock %}
+</head>
+<body>
+
+<!-- ------------------------------------------------------------------ -->
+<!-- Shared chrome: ASK header (mark + ecosystem switcher + nav)           -->
+<!-- ------------------------------------------------------------------ -->
+{% include "_shared/header.html" %}
+
+<!-- ------------------------------------------------------------------ -->
+<!-- Page content (#ark-main = skip-link target)                          -->
+<!-- ------------------------------------------------------------------ -->
+<div id="ark-main">
+{% block content %}{% endblock %}
+
+<!-- Methodex-specific public-domain disclosure (kept above the mandated
+     dual-anchor footer; the public-only guarantee is core to this site). -->
+<aside class="container" style="padding-top:18px;padding-bottom:6px;color:var(--muted);font-size:0.9rem;">
+  <span class="pub-badge">Public-domain layer only · 17 U.S.C. §105</span>
+  This hosted instance serves <strong>only</strong> the public-domain
+  US-federal-government layer (957 documents / 392 revision events /
+  80 statistics). No in-copyright, international, academic, or
+  unknown-producer material appears anywhere on this site.
+</aside>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<!-- Shared chrome: kit v2.0 Action Footer (compact triad + Website source + -->
+<!-- Cite) ABOVE the mandated dual-anchor colophon (preserved byte-for-byte).-->
+<!-- ------------------------------------------------------------------ -->
+{% include "_shared/action-footer.html" %}
+
+{% block body_scripts %}{% endblock %}
+
+<!-- ASK chrome enhancer (no-JS-degradable switcher + copy buttons) -->
+<script>
+  window.ARK_CONFIG = {
+    site_key: "{{ site_key }}",
+    dpr_url: "{{ dpr_url | default('/about', true) }}",
+    ecosystem_url: "/static/_shared/ecosystem.json"
+  };
+  // Kit v2.0 Research-Triad / Action-Footer telemetry transport (Layer-2/3).
+  window.ARK_TRACK = { site: "{{ site_key }}", endpoint: "/__track" };
+</script>
+<script src="/static/_shared/arcanum-chrome.js?v={{ asset_ver }}" defer></script>
+<!-- Kit v2.0 — hydrates the footer compact triad + Website-source/Cite, and
+     enhances the server-rendered hero triad with click telemetry. -->
+<script src="/static/_shared/ark-triad.js?v={{ asset_ver }}" defer></script>
+</body>
+</html>

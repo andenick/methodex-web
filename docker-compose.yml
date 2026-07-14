@@ -1,0 +1,35 @@
+# Methodex website (methodex.fyi) — FastAPI/gunicorn :8080, public-domain layer only.
+# cloudflared routes methodex.fyi -> methodex-web:8080 over the homelab network.
+services:
+  methodex-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    image: methodex-web:local
+    container_name: methodex-web
+    restart: unless-stopped
+    environment:
+      - METHODEX_PUBLIC_ONLY=1
+    networks:
+      - homelab_default
+
+  # Methodex MCP server (mcp.methodex.fyi -> methodex-mcp:8000, route added later).
+  # Streamable-HTTP MCP transport on :8000 (path /mcp). PUBLIC-ONLY layer, no host ports,
+  # no live API keys — public-domain US-Gov data only, same posture as methodex-web.
+  methodex-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    image: methodex-mcp:local
+    container_name: methodex-mcp
+    restart: unless-stopped
+    environment:
+      - METHODEX_PUBLIC_ONLY=1
+      - METHODEX_MCP_HOST=0.0.0.0
+      - METHODEX_MCP_PORT=8000
+    networks:
+      - homelab_default
+
+networks:
+  homelab_default:
+    external: true

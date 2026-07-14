@@ -1,0 +1,30 @@
+# Methodex public website — box deploy variant (carson-telemetry vendored).
+# Serves ONLY the 957-doc public-domain layer (METHODEX_PUBLIC_ONLY=1, also forced in code).
+FROM python:3.13-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/app/webapp:/app/Methodex/src \
+    METHODEX_PUBLIC_ONLY=1 \
+    CARSON_TELEMETRY_DB=/var/lib/carson/telemetry.db \
+    CARSON_TELEMETRY_SALT_DIR=/var/lib/carson/salt
+
+WORKDIR /app
+
+# carson-telemetry (first-party analytics) is OPTIONAL and not bundled in this
+# public repo; app.main attaches it only if importable. Build without it.
+COPY webapp/requirements.txt /app/webapp/requirements.txt
+RUN grep -v '^carson-telemetry' /app/webapp/requirements.txt > /tmp/req.txt && \
+    pip install --no-cache-dir -r /tmp/req.txt
+
+# Reused query logic + canonical public-domain state (methodex_mcp.py resolves state relative to itself)
+COPY src/methodex_mcp.py      /app/Methodex/src/methodex_mcp.py
+COPY Technical/campaign/state /app/Methodex/Technical/campaign/state
+
+COPY webapp/app       /app/webapp/app
+COPY webapp/site_data /app/webapp/site_data
+
+EXPOSE 8080
+CMD ["gunicorn", "app.main:app", "--chdir", "/app/webapp", \
+     "-k", "uvicorn.workers.UvicornWorker", "-w", "2", \
+     "-b", "0.0.0.0:8080", "--timeout", "120"]

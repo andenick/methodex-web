@@ -1,0 +1,1133 @@
+[
+ {
+  "statistic_id": "US.BLS.CPI_U",
+  "name": "U.S. Consumer Price Index for All Urban Consumers (CPI-U)",
+  "aliases": [
+   "CPI",
+   "CPI-U",
+   "consumer price index",
+   "cost of living index",
+   "inflation index"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "prices",
+  "first_published": "1919",
+  "data_vintage_source": "ALFRED:CPIAUCSL"
+ },
+ {
+  "statistic_id": "US.BEA.GDP.REAL",
+  "name": "U.S. Real Gross Domestic Product (NIPA)",
+  "aliases": [
+   "GDP",
+   "real GDP",
+   "gross domestic product",
+   "national income and product accounts",
+   "NIPA"
+  ],
+  "producer_id": "BEA",
+  "geography": "US",
+  "family": "national_accounts",
+  "first_published": "1942",
+  "data_vintage_source": "ALFRED:GDPC1"
+ },
+ {
+  "statistic_id": "US.BEA.IO",
+  "name": "U.S. Benchmark Input-Output Accounts",
+  "aliases": [
+   "input-output",
+   "I-O accounts",
+   "input output",
+   "make and use tables"
+  ],
+  "producer_id": "BEA",
+  "geography": "US",
+  "family": "input_output",
+  "first_published": "1964",
+  "data_vintage_source": null
+ },
+ {
+  "statistic_id": "US.BEA.DPI",
+  "name": "BEA Disposable Personal Income",
+  "aliases": [
+   "BEA DPI",
+   "DPI"
+  ],
+  "producer_id": "BEA",
+  "geography": "US",
+  "family": "national_accounts",
+  "first_published": null,
+  "data_vintage_source": "ALFRED:DSPIC96",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BEA.FA",
+  "name": "BEA Fixed Assets Accounts",
+  "aliases": [
+   "BEA FA",
+   "FA"
+  ],
+  "producer_id": "BEA",
+  "geography": "US",
+  "family": "national_accounts",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BEA.IMA",
+  "name": "BEA Integrated Macroeconomic Accounts",
+  "aliases": [
+   "BEA IMA",
+   "IMA"
+  ],
+  "producer_id": "BEA",
+  "geography": "US",
+  "family": "national_accounts",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BEA.ITA",
+  "name": "BEA International Transactions Accounts (ITA)",
+  "aliases": [
+   "BEA ITA",
+   "ITA"
+  ],
+  "producer_id": "BEA",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BEA.REGIONAL",
+  "name": "BEA Regional Accounts (GDP by state/metro)",
+  "aliases": [
+   "BEA REGIONAL",
+   "REGIONAL"
+  ],
+  "producer_id": "BEA",
+  "geography": "US",
+  "family": "national_accounts",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BEA.SATELLITE",
+  "name": "BEA Satellite Accounts",
+  "aliases": [
+   "BEA SATELLITE",
+   "SATELLITE"
+  ],
+  "producer_id": "BEA",
+  "geography": "US",
+  "family": "national_accounts",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.ATUS",
+  "name": "BLS American Time Use Survey",
+  "aliases": [
+   "ATUS",
+   "BLS ATUS"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.BED",
+  "name": "BLS Business Employment Dynamics (BED)",
+  "aliases": [
+   "BED",
+   "BLS BED"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.CE",
+  "name": "BLS Consumer Expenditure Survey",
+  "aliases": [
+   "BLS CE",
+   "CE"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.CES",
+  "name": "BLS Current Employment Statistics",
+  "aliases": [
+   "BLS CES",
+   "CES"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": "PAYEMS",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.CPS",
+  "name": "BLS Current Population Survey",
+  "aliases": [
+   "BLS CPS",
+   "CPS"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": "UNRATE",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.ECI",
+  "name": "BLS Employment Cost Index (ECI)",
+  "aliases": [
+   "BLS ECI",
+   "ECI"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": "ALFRED:ECIALLCIV",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.EP",
+  "name": "BLS Employment Projections (EP)",
+  "aliases": [
+   "BLS EP",
+   "EP"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.HOM",
+  "name": "BLS CPI Handbook of Methods",
+  "aliases": [
+   "BLS HOM",
+   "HOM"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.JOLTS",
+  "name": "BLS Job Openings and Labor Turnover Survey (JOLTS)",
+  "aliases": [
+   "BLS JOLTS",
+   "JOLTS"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": "ALFRED:JTSJOL",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.LAUS",
+  "name": "BLS Local Area Unemployment Statistics",
+  "aliases": [
+   "BLS LAUS",
+   "LAUS"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": "ALFRED:UNRATE",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.MXPI",
+  "name": "BLS Multifactor Productivity",
+  "aliases": [
+   "BLS MXPI",
+   "MXPI"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "prices",
+  "first_published": null,
+  "data_vintage_source": "ALFRED:MFPNFBS",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.OEWS",
+  "name": "BLS Occupational Employment and Wage Statistics",
+  "aliases": [
+   "BLS OEWS",
+   "OEWS"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": "ALFRED:CES0500000003",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.PPI",
+  "name": "BLS Producer Price Index",
+  "aliases": [
+   "BLS PPI",
+   "PPI"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "prices",
+  "first_published": null,
+  "data_vintage_source": "PPIACO",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.PRODUCTIVITY",
+  "name": "BLS Labor Productivity and Costs",
+  "aliases": [
+   "BLS PRODUCTIVITY",
+   "PRODUCTIVITY"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": "OPHNFB",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.QCEW",
+  "name": "BLS Quarterly Census of Employment and Wages",
+  "aliases": [
+   "BLS QCEW",
+   "QCEW"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.BLS.SOII",
+  "name": "BLS Survey of Occupational Injuries and Illnesses",
+  "aliases": [
+   "BLS SOII",
+   "SOII"
+  ],
+  "producer_id": "BLS",
+  "geography": "US",
+  "family": "labor",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.ABS",
+  "name": "U.S. CENSUS Abs",
+  "aliases": [
+   "ABS",
+   "CENSUS ABS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.ACES",
+  "name": "Census Annual Capital Expenditures Survey (ACES)",
+  "aliases": [
+   "ACES",
+   "CENSUS ACES"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.ARTS",
+  "name": "U.S. CENSUS Arts",
+  "aliases": [
+   "ARTS",
+   "CENSUS ARTS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.ASM",
+  "name": "U.S. CENSUS Asm",
+  "aliases": [
+   "ASM",
+   "CENSUS ASM"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.BDS",
+  "name": "U.S. CENSUS Bds",
+  "aliases": [
+   "BDS",
+   "CENSUS BDS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.BFS",
+  "name": "Census Business Formation Statistics",
+  "aliases": [
+   "BFS",
+   "CENSUS BFS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "research_methodology",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.CBP",
+  "name": "U.S. CENSUS Cbp",
+  "aliases": [
+   "CBP",
+   "CENSUS CBP"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.CONSTRUCTION",
+  "name": "U.S. CENSUS Construction",
+  "aliases": [
+   "CENSUS CONSTRUCTION",
+   "CONSTRUCTION"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.DECENNIAL",
+  "name": "Census Decennial Census of Population and Housing",
+  "aliases": [
+   "CENSUS DECENNIAL",
+   "DECENNIAL"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.ECONCENSUS",
+  "name": "U.S. CENSUS Econcensus",
+  "aliases": [
+   "CENSUS ECONCENSUS",
+   "ECONCENSUS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.M3",
+  "name": "U.S. CENSUS M3",
+  "aliases": [
+   "CENSUS M3",
+   "M3"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.MARTS",
+  "name": "U.S. CENSUS Marts",
+  "aliases": [
+   "CENSUS MARTS",
+   "MARTS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.NAICS",
+  "name": "Census NAICS Industry Classification",
+  "aliases": [
+   "CENSUS NAICS",
+   "NAICS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.QFR",
+  "name": "Census Quarterly Financial Report",
+  "aliases": [
+   "CENSUS QFR",
+   "QFR"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "research_methodology",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.QSS",
+  "name": "Census Quarterly Services Survey",
+  "aliases": [
+   "CENSUS QSS",
+   "QSS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "research_methodology",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.SAS",
+  "name": "U.S. CENSUS Sas",
+  "aliases": [
+   "CENSUS SAS",
+   "SAS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.TRADE",
+  "name": "Census International Trade Statistics",
+  "aliases": [
+   "CENSUS TRADE",
+   "TRADE"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "external",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CLEV.MEDCPI",
+  "name": "Cleveland Fed Median CPI",
+  "aliases": [
+   "CLEV MEDCPI",
+   "MEDCPI"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "prices",
+  "first_published": null,
+  "data_vintage_source": "MEDCPIM158SFRBCLE",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FFIEC.CALLREPORT",
+  "name": "FFIEC Consolidated Reports of Condition and Income (Call Report)",
+  "aliases": [
+   "CALLREPORT",
+   "FFIEC CALLREPORT"
+  ],
+  "producer_id": "FFIEC",
+  "geography": "US",
+  "family": "banking_regulatory",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FHFA.HPI",
+  "name": "FHFA House Price Index (HPI)",
+  "aliases": [
+   "FHFA HPI",
+   "HPI"
+  ],
+  "producer_id": "FHFA",
+  "geography": "US",
+  "family": "prices",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FRB.G17",
+  "name": "Federal Reserve G.17 Industrial Production",
+  "aliases": [
+   "FRB G17",
+   "G17"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": "INDPRO",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FRB.G19",
+  "name": "Federal Reserve G.19 Consumer Credit",
+  "aliases": [
+   "FRB G19",
+   "G19"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": "TOTALSL",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FRB.H15",
+  "name": "Federal Reserve H.15 Selected Interest Rates",
+  "aliases": [
+   "FRB H15",
+   "H15"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FRB.H6",
+  "name": "Federal Reserve H.6 Money Stock Measures",
+  "aliases": [
+   "FRB H6",
+   "H6"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": "M2SL",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FRB.H8",
+  "name": "U.S. FRB H8",
+  "aliases": [
+   "FRB H8",
+   "H8"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FRB.REGIONAL",
+  "name": "Federal Reserve Regional/District data",
+  "aliases": [
+   "FRB REGIONAL",
+   "REGIONAL"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "national_accounts",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FRB.SCF",
+  "name": "Federal Reserve Survey of Consumer Finances (SCF)",
+  "aliases": [
+   "FRB SCF",
+   "SCF"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.FRB.Z1",
+  "name": "U.S. FRB Z1",
+  "aliases": [
+   "FRB Z1",
+   "Z1"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NY.NOWCAST",
+  "name": "New York Fed Staff Nowcast",
+  "aliases": [
+   "NOWCAST",
+   "NY NOWCAST"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.PHIL.ADS",
+  "name": "Philadelphia Fed ADS Business Conditions Index",
+  "aliases": [
+   "ADS",
+   "PHIL ADS"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": "ads",
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.PHIL.SPF",
+  "name": "Philadelphia Fed Survey of Professional Forecasters",
+  "aliases": [
+   "PHIL SPF",
+   "SPF"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "money_finance",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.TREASURY.MTS",
+  "name": "U.S. TREASURY Mts",
+  "aliases": [
+   "MTS",
+   "TREASURY MTS"
+  ],
+  "producer_id": "Treasury",
+  "geography": "US",
+  "family": "fiscal",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.TREASURY.OTA",
+  "name": "Treasury Office of Tax Analysis estimates",
+  "aliases": [
+   "OTA",
+   "TREASURY OTA"
+  ],
+  "producer_id": "Treasury",
+  "geography": "US",
+  "family": "fiscal",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.TREASURY.SOI",
+  "name": "IRS Statistics of Income (SOI)",
+  "aliases": [
+   "SOI",
+   "TREASURY SOI"
+  ],
+  "producer_id": "Treasury",
+  "geography": "US",
+  "family": "fiscal",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.TREASURY.TIC",
+  "name": "Treasury International Capital (TIC) System",
+  "aliases": [
+   "TIC",
+   "TREASURY TIC"
+  ],
+  "producer_id": "Treasury",
+  "geography": "US",
+  "family": "external",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.LEHD",
+  "name": "Census Longitudinal Employer-Household Dynamics (LEHD)",
+  "aliases": [
+   "CENSUS LEHD",
+   "LEHD"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.ATL.GDPNOW",
+  "name": "Atlanta Fed GDPNow",
+  "aliases": [
+   "ATL GDPNOW",
+   "GDPNOW"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "national_accounts",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NCHS.NHIS",
+  "name": "NCHS National Health Interview Survey (NHIS)",
+  "aliases": [
+   "NCHS NHIS",
+   "NHIS"
+  ],
+  "producer_id": "Nchs",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NCHS.NVSS",
+  "name": "NCHS National Vital Statistics System (NVSS)",
+  "aliases": [
+   "NCHS NVSS",
+   "NVSS"
+  ],
+  "producer_id": "Nchs",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NCHS.VITALSTATS",
+  "name": "U.S. NCHS Vitalstats",
+  "aliases": [
+   "NCHS VITALSTATS",
+   "VITALSTATS"
+  ],
+  "producer_id": "Nchs",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CFTC.PART45.FR",
+  "name": "CFTC Part 45 Swap Data Reporting (Final Rule)",
+  "aliases": [
+   "CFTC PART45",
+   "FR",
+   "PART45"
+  ],
+  "producer_id": "Cftc",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.EIA.METHOD",
+  "name": "EIA survey methodology",
+  "aliases": [
+   "EIA METHOD",
+   "METHOD"
+  ],
+  "producer_id": "Eia",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.EIA.STEO",
+  "name": "EIA Short-Term Energy Outlook (STEO)",
+  "aliases": [
+   "EIA STEO",
+   "STEO"
+  ],
+  "producer_id": "Eia",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.EPA.GHGI",
+  "name": "EPA Inventory of U.S. Greenhouse Gas Emissions and Sinks (GHGI)",
+  "aliases": [
+   "EPA GHGI",
+   "GHGI"
+  ],
+  "producer_id": "Epa",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.EPA.GHGRP",
+  "name": "EPA Greenhouse Gas Reporting Program (GHGRP)",
+  "aliases": [
+   "EPA GHGRP",
+   "GHGRP"
+  ],
+  "producer_id": "Epa",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NCES.HANDBOOK",
+  "name": "U.S. NCES Handbook",
+  "aliases": [
+   "HANDBOOK",
+   "NCES HANDBOOK"
+  ],
+  "producer_id": "Nces",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NCES.NAEP",
+  "name": "NCES National Assessment of Educational Progress (NAEP)",
+  "aliases": [
+   "NAEP",
+   "NCES NAEP"
+  ],
+  "producer_id": "Nces",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NYFED.SOFR",
+  "name": "New York Fed Secured Overnight Financing Rate (SOFR)",
+  "aliases": [
+   "NYFED SOFR",
+   "SOFR"
+  ],
+  "producer_id": "Nyfed",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NYFED.SOFR.IOSCO",
+  "name": "New York Fed SOFR (IOSCO compliance)",
+  "aliases": [
+   "IOSCO",
+   "NYFED SOFR",
+   "SOFR"
+  ],
+  "producer_id": "Nyfed",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NYFED.SOFR.MODS",
+  "name": "New York Fed SOFR (methodology modifications)",
+  "aliases": [
+   "MODS",
+   "NYFED SOFR",
+   "SOFR"
+  ],
+  "producer_id": "Nyfed",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.CENSUS.DAS",
+  "name": "Census Disclosure Avoidance System (DAS)",
+  "aliases": [
+   "CENSUS DAS",
+   "DAS"
+  ],
+  "producer_id": "Census",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.IRS.SOI.CORP",
+  "name": "U.S. IRS Soi (Corp)",
+  "aliases": [
+   "CORP",
+   "IRS SOI",
+   "SOI"
+  ],
+  "producer_id": "Irs",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.IRS.SOI.INDIV",
+  "name": "U.S. IRS Soi (Indiv)",
+  "aliases": [
+   "INDIV",
+   "IRS SOI",
+   "SOI"
+  ],
+  "producer_id": "Irs",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.NY.WEI",
+  "name": "New York Fed Weekly Economic Index (WEI)",
+  "aliases": [
+   "NY WEI",
+   "WEI"
+  ],
+  "producer_id": "FederalReserve",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ },
+ {
+  "statistic_id": "US.IRS.SOI.RESEARCH",
+  "name": "IRS Statistics of Income (SOI) research data",
+  "aliases": [
+   "IRS SOI",
+   "RESEARCH",
+   "SOI"
+  ],
+  "producer_id": "Irs",
+  "geography": "US",
+  "family": "other",
+  "first_published": null,
+  "data_vintage_source": null,
+  "notes": "auto-seeded 2026-06-02 (G3); name/aliases pending agent enrichment"
+ }
+]

@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}Methodology &amp; provenance — {{ site_title }}{% endblock %}
+{% block description %}How the Methodex public layer is built: sources, construction, units, coverage, limits, last-updated and citations — the Data Provenance Record (DPR).{% endblock %}
+{% block content %}
+<main class="content">
+  <div class="container prose">
+    <h1>Methodology &amp; provenance</h1>
+    <p class="lede">
+      Every document, revision event, and statistic served here is transcribed
+      from a public-domain US-federal-government source and carries a governing
+      citation — nothing is fabricated. This page is the Data Provenance Record
+      (DPR): <strong>sources · construction · units · coverage · limits ·
+      last-updated · citations</strong>.
+    </p>
+    <p>
+      <span class="pub-badge">Public-domain layer only · 17 U.S.C. §105</span>
+    </p>
+    <p>
+      <span class="ark-badge reproducible">Reproducible</span>
+      <span class="ark-badge offline">Offline</span>
+      <span class="ark-badge real-data">Real data</span>
+    </p>
+  </div>
+
+  <!-- Standard DPR / provenance panel ----------------------------------- -->
+  <div class="container">
+  <section class="ark-provenance">
+    <h2>Data Provenance Record</h2>
+    <dl>
+      <dt>Sources</dt>
+      <dd>
+        <strong>US-federal-government statistical manuals, handbooks, and
+        releases</strong> — BEA NIPA handbooks, BLS CPI/CES handbooks, and sibling
+        US-Gov works, public domain under <strong>17 U.S.C. §105</strong> and hence
+        servable verbatim. <strong>Revision events</strong> are cited methodology
+        changes extracted from those governing documents, each carrying a
+        governing-document MD5 + page citation. <strong>Data-vintage links</strong>
+        are ALFRED/FRED real-time series pointers (St. Louis Fed) cross-linking a
+        methodology to the data vintage in force at a date.
+      </dd>
+
+      <dt>Construction</dt>
+      <dd>
+        The corpus was collected, transcribed, structured, and license-classified
+        in the Methodex campaign (<code>Technical/campaign/</code>), then carved to
+        the public-domain layer by a license-classification step. The hosted app
+        forces <code>METHODEX_PUBLIC_ONLY=1</code> at import time, so the in-memory
+        stores are physically filtered to public-domain documents and the events,
+        measures, and statistics derived from them. The served layer is
+        <strong>{{ status.documents }}</strong> documents,
+        <strong>{{ status.events }}</strong> cited revision events,
+        <strong>{{ status.statistic_entities }}</strong> statistic entities
+        catalogued (<strong>{{ status.statistics_with_events }}</strong> with served
+        revision histories), and <strong>{{ status.measures }}</strong> published
+        measures/tables. The same store powers the
+        <a href="/explore">Explore</a> timelines, the <a href="/data">Data</a>
+        downloads, and the sibling MCP server — see <a href="/code">Code</a>.
+      </dd>
+
+      <dt>Units &amp; coverage</dt>
+      <dd>
+        Coverage is organised by statistic <em>family</em>. Families present in the
+        served layer (with the number of statistics that carry cited revision
+        histories):
+        {% for f in families %}<code>{{ f.family }}</code>&nbsp;({{ f.n }}){% if not loop.last %}, {% endif %}{% endfor %}.
+        Each statistic is keyed by a canonical id
+        (e.g. <code>US.BLS.CPI_U</code>); revision events are placed on a
+        per-statistic effective-year axis. The unit of every figure on the site is
+        a <em>methodology event</em> (a dated, cited change), not a data value —
+        Methodex documents how statistics were measured, it does not republish the
+        series themselves.
+      </dd>
+
+      <dt>Limits</dt>
+      <dd>
+        <ul style="margin:.2em 0 0;padding-left:1.1em;">
+          <li><strong>Public-domain layer only.</strong> The full Methodex research
+              corpus also contains in-copyright international / academic /
+              unknown-producer material; <strong>none</strong> of it is loaded or
+              served here. In-copyright sources are <em>digest-only</em> in the
+              research corpus and are never served verbatim by this site.</li>
+          <li><strong>Counts are a strict subset.</strong> Public-only filtering
+              drops events whose governing document is non-public, so the hosted
+              event/statistic counts ({{ status.events }} / {{ status.statistic_entities }})
+              are smaller than the full-corpus totals.</li>
+          <li><strong>Verification is partial.</strong> {{ status.verified_events }}
+              events are adversarially verified and flagged inline; the rest are
+              transcribed-with-citation but not independently re-verified.</li>
+          <li><strong>Vintage links are pointers.</strong>
+              <code>get_vintage_data</code> returns ALFRED/FRED <em>URLs</em> only —
+              it never fetches data over the network at runtime (keeps the deploy
+              offline-safe).</li>
+          <li><strong>Some bindings are heuristic.</strong>
+              <code>_doc_matches_stat</code> uses MVP title/producer heuristics for
+              a few statistic↔document links; canonical <code>statistic_ids</code>
+              bindings are authoritative where present.</li>
+        </ul>
+      </dd>
+
+      <dt>Downloads</dt>
+      <dd>
+        The three served datasets — <code>statistics</code>,
+        <code>revision_events</code>, and <code>documents</code> — are downloadable
+        as <strong>CSV</strong> from the <a href="/data">Data</a> page (and bundled
+        in <a href="/download/bundle.zip">bundle.zip</a> with a README). The unit is
+        a methodology <em>event</em>, not a data series, so the public layer is
+        tabular CSV; the machine-readable coverage manifest (metadata, not a
+        dataset download) is at
+        <a href="/metadata/manifest.json">/metadata/manifest.json</a>. No JSON
+        dataset downloads are offered as the user-facing data format.
+      </dd>
+
+      <dt>Refresh cadence</dt>
+      <dd>
+        <strong>On-source-release (manual)</strong>. The governing documents are
+        US-federal statistical manuals and handbooks (BEA NIPA Handbook, BLS
+        Handbook of Methods, agency release notes) that revise on irregular agency
+        schedules; new revision events are transcribed-with-citation as those
+        sources publish, in the Methodex campaign, then re-carved to the
+        public-only layer by a license-classification step and redeployed.
+        There is no fixed automated cadence — the corpus grows as governing
+        documents are released and processed.
+      </dd>
+
+      <dt>Citations</dt>
+      <dd>
+        Legal basis: <strong>17 U.S.C. §105</strong> (works of the U.S. federal
+        government are not subject to copyright). Primary governing sources include
+        the <em>BEA NIPA Handbook</em>, the <em>BLS Handbook of Methods</em> (CPI,
+        CES, and sibling chapters), and the agency release notes from which each
+        revision event is cited. Every served event names its governing document
+        and page; the full set is downloadable on the <a href="/data">Data</a> page.
+      </dd>
+    </dl>
+    <p class="ark-prov-updated">
+      Last updated — DPR 2026-06-07 · manifest generated 2026-06-05 ·
+      coverage figures live from the public-only store.
+    </p>
+  </section>
+  </div>
+
+  <!-- The full DPR, rendered (markdown -> HTML, never literal markup) ----- -->
+  {% if dpr_html %}
+  <div class="container">
+    <h2>Full Deployment Provenance Record (DPR.md)</h2>
+    <p class="muted">The complete on-disk DPR for this deployment, rendered from
+      <code>deploy/methodex/DPR.md</code>.</p>
+    <details>
+      <summary>Show DPR.md</summary>
+      <div class="ark-prose">{{ dpr_html | safe }}</div>
+    </details>
+  </div>
+  {% endif %}
+</main>
+{% endblock %}

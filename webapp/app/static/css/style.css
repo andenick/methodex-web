@@ -1,0 +1,234 @@
+/* Methodex public website — clean, accessible, data-scientist surface. */
+
+/* v1.1 token-migration: the site's own custom props now DERIVE from the Arcanum
+   Site Kit --ark-* tokens (defined in arcanum.css, flipped by the chrome theme
+   toggle). The body therefore flips light/dark in lockstep with the kit chrome —
+   no white-body-under-dark-chrome seam. Fallback literals kept after each var()
+   for the (impossible-in-practice) case arcanum.css fails to load.
+   ACCENT FIX: --accent was hardcoded blue (#2563eb); it now follows the kit
+   violet accent (--ark-accent) so CTAs/links/stats match the chrome. */
+:root {
+  --ink: var(--ark-fg, #111827);
+  --muted: var(--ark-fg-dim, #6b7280);
+  --line: var(--ark-line, #e5e7eb);
+  --bg: var(--ark-bg, #ffffff);
+  --bg-soft: var(--ark-bg-soft, #f8fafc);
+  --accent: var(--ark-accent, #7c4dff);
+  --accent-dark: color-mix(in srgb, var(--ark-accent, #7c4dff) 82%, #000);
+  --pub: #047857;       /* public-domain green — semantic data color, not chrome */
+  --pub-bg: #ecfdf5;
+  --maxw: 1080px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+code {
+  font: 0.86em/1.4 "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+}
+
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+/* ---- nav ---- */
+.nav {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  position: sticky; top: 0; z-index: 50;
+}
+.nav .inner {
+  max-width: var(--maxw); margin: 0 auto; padding: 12px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.brand { font-weight: 700; font-size: 1.2rem; color: var(--ink); display: flex; flex-direction: column; }
+.brand:hover { text-decoration: none; }
+.brand small { font-weight: 400; font-size: 0.7rem; color: var(--muted); }
+.nav nav { display: flex; gap: 18px; align-items: center; }
+.nav nav a { color: var(--ink); font-weight: 500; }
+.nav nav a.active { color: var(--accent); }
+.nav nav a.dl {
+  border: 1px solid var(--accent); color: var(--accent);
+  padding: 4px 12px; border-radius: 6px; font-size: 0.92rem;
+}
+
+/* ---- content ---- */
+.content { padding: 28px 0 60px; }
+h1 { font-size: 2rem; line-height: 1.2; margin: 0.2em 0 0.4em; }
+h2 { font-size: 1.4rem; margin: 1.6em 0 0.5em; }
+h3 { font-size: 1.1rem; margin: 0 0 0.4em; }
+.lede { font-size: 1.12rem; color: var(--ink); max-width: 70ch; }
+.muted { color: var(--muted); }
+.prose { max-width: 74ch; }
+.prose ul.facts { padding-left: 1.1em; }
+.prose ul.facts li { margin: 0.25em 0; }
+
+/* ---- hero ---- */
+.hero { background: linear-gradient(180deg, var(--bg-soft), var(--bg)); padding: 36px 0 20px; }
+.hero h1 { font-size: 2.6rem; }
+.hero h1 em { color: var(--accent); font-style: italic; }
+.killer { margin: 22px 0; }
+.killer-q {
+  background: var(--bg-soft); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+  border-radius: 8px; padding: 16px 18px; max-width: 72ch;
+}
+.killer-q p { margin: 0.4em 0; font-size: 1.1rem; }
+.killer-a { color: var(--muted); font-size: 0.98rem !important; }
+.badge {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; color: var(--accent); background: var(--ark-accent-soft, #eff6ff);
+  border-radius: 999px; padding: 2px 10px; margin-bottom: 6px;
+}
+
+/* ---- buttons ---- */
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0 8px; }
+.btn {
+  display: inline-block; border: 1px solid var(--line); background: var(--bg-soft); color: var(--ink);
+  padding: 9px 16px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer;
+}
+.btn:hover { text-decoration: none; border-color: #cbd5e1; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover { background: var(--accent-dark); }
+.btn.ghost { background: transparent; }
+.btn.small { padding: 4px 10px; font-size: 0.82rem; }
+
+/* ---- stats strip ---- */
+.stats-strip { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 28px 0; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.stat { text-align: center; padding: 20px 8px; border-right: 1px solid var(--line); }
+.stat:last-child { border-right: 0; }
+.stat .num { display: block; font-size: 2rem; font-weight: 700; color: var(--accent); }
+.stat .lbl { color: var(--muted); font-size: 0.86rem; }
+
+/* ---- cards ---- */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 16px 0; }
+.card { display: block; border: 1px solid var(--line); border-radius: 10px; padding: 18px; background: var(--bg-soft); color: var(--ink); }
+.card:hover { text-decoration: none; border-color: var(--accent); box-shadow: 0 2px 12px color-mix(in srgb, var(--accent) 14%, transparent); }
+.card p { color: var(--muted); margin: 0; font-size: 0.95rem; }
+
+/* ---- explorer controls ---- */
+.explore-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0 6px; }
+.explore-controls input[type="search"] {
+  flex: 1 1 320px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; font-size: 1rem;
+}
+.explore-controls select { padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; font-size: 0.95rem; background: var(--bg-soft); color: var(--ink); }
+.explore-controls input[type="search"] { background: var(--bg-soft); color: var(--ink); }
+.result-count { color: var(--muted); font-size: 0.9rem; }
+
+/* ---- tables ---- */
+.stat-table-wrap, .doc-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.94rem; }
+thead th { text-align: left; background: var(--bg-soft); border-bottom: 1px solid var(--line); padding: 10px 12px; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+tbody td { padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: var(--bg-soft); }
+.num { text-align: right; }
+.sid code { font-size: 0.78rem; }
+.aliases { color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
+.tag { display: inline-block; background: var(--ark-tag, #eef2ff); color: var(--accent); border-radius: 6px; padding: 1px 8px; font-size: 0.8rem; }
+
+/* ---- statistic detail ---- */
+.crumb { margin-bottom: 8px; font-size: 0.9rem; }
+.stat-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 6px 0; }
+.timeline-block { margin: 18px 0; }
+.plot { width: 100%; min-height: 280px; border: 1px solid var(--line); border-radius: 10px; }
+.dl-note { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; color: var(--muted); margin: 14px 0; }
+.dl-note a { font-weight: 600; }
+
+.event-list { list-style: none; padding: 0; margin: 0; }
+.event { border-left: 3px solid var(--line); padding: 8px 0 8px 14px; margin: 0 0 10px; }
+.event-head { display: flex; gap: 10px; align-items: baseline; }
+.event-head .yr { font-weight: 700; font-size: 1.05rem; }
+.event-head .etype { color: var(--accent); font-size: 0.85rem; font-weight: 600; }
+.event-head .verified { color: var(--pub); font-size: 0.8rem; }
+.event-desc { margin: 4px 0; }
+.event-cite { color: var(--muted); font-size: 0.82rem; }
+.event-cite .concepts { display: block; margin-top: 2px; font-style: italic; }
+
+/* ---- public-domain badge ---- */
+.pub-badge { display: inline-block; background: var(--pub-bg); color: var(--pub); border: 1px solid #a7f3d0; border-radius: 999px; padding: 1px 10px; font-size: 0.8rem; font-weight: 600; }
+.pub-badge.small { font-size: 0.72rem; }
+
+/* ---- footer ---- */
+footer.site { border-top: 1px solid var(--line); background: var(--bg-soft); padding: 24px 0; margin-top: 40px; color: var(--muted); font-size: 0.9rem; }
+footer.site strong { color: var(--ink); }
+footer.site a { font-weight: 600; }
+.arcanum-chrome { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 0.82rem; color: var(--muted); }
+.arcanum-chrome a { color: var(--muted); text-decoration: underline; font-weight: 500; }
+.arcanum-chrome a:hover { color: var(--ink); }
+
+.empty { color: var(--muted); padding: 20px 0; }
+
+/* ---- pager ---- */
+.pager { display: flex; align-items: center; gap: 14px; margin: 16px 0 4px; }
+.pager-status { color: var(--muted); font-size: 0.9rem; }
+.btn.disabled { opacity: 0.45; cursor: default; pointer-events: none; }
+
+@media (max-width: 720px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .stat { border-bottom: 1px solid var(--line); }
+  .hero h1 { font-size: 2rem; }
+}
+
+/* ============================================================================
+   CODE & DATA FIRST — hero actions: the kit Research Triad BESIDE the
+   agent-first "Agents: connect via MCP" centerpiece card (MXF-1).
+   The triad stays the canonical Data·Code·Outputs row; the MCP card sits to its
+   right at >=768px and stacks beneath it at narrow widths. Tokens only (violet
+   --accent, --line, --bg-soft) so it re-themes light/dark with the chrome.
+   ========================================================================== */
+.mx-hero-actions {
+  display: flex; flex-wrap: wrap; gap: 18px;
+  align-items: stretch; margin: 20px 0 6px;
+}
+.mx-triad-wrap { flex: 1 1 460px; min-width: 0; display: flex; align-items: center; }
+.mx-triad-wrap .ark-triad { width: 100%; margin: 0; }
+
+.mx-mcp-card {
+  flex: 1 1 320px; min-width: 0;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  background: var(--bg-soft);
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.mx-mcp-top { display: flex; align-items: center; gap: 10px; }
+.mx-mcp-badge {
+  font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: #fff; background: var(--accent); border-radius: 999px; padding: 2px 9px;
+}
+.mx-mcp-title { margin: 0; font-size: 1.12rem; line-height: 1.2; }
+.mx-mcp-endpoint { margin: 2px 0 0; }
+.mx-mcp-mono {
+  display: inline-block; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.98rem; font-weight: 600;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 6px;
+  padding: 4px 10px; cursor: pointer; user-select: all;
+}
+.mx-mcp-mono:hover { border-color: var(--accent); }
+.mx-mcp-line { margin: 2px 0 0; font-size: 0.95rem; color: var(--ink); }
+.mx-mcp-line code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px;
+}
+.mx-mcp-sub { margin: 2px 0 4px; font-size: 0.82rem; color: var(--muted); }
+.mx-mcp-card .btn.small { align-self: flex-start; }
+
+@media (max-width: 767px) {
+  .mx-hero-actions { flex-direction: column; }
+  .mx-triad-wrap, .mx-mcp-card { flex: 1 1 auto; }
+}

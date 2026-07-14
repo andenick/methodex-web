@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}About — {{ site_title }}{% endblock %}
+{% block description %}What Methodex is, the public-only guarantee (17 U.S.C. §105), what the hosted layer serves, and how the same corpus powers a 13-tool MCP API for agents at mcp.methodex.fyi.{% endblock %}
+{% block content %}
+<main class="content">
+  <div class="container prose">
+    <h1>About Methodex</h1>
+    <p>
+      <strong>Methodex</strong> is a "Context7 for economic methodology": it
+      collects, transcribes, structures, and serves the
+      <em>construction-and-revision history</em> of every economic statistic,
+      cross-linked to the data vintage. The killer query —
+      <em>"How was U.S. GDP measured in 1985 vs 2015, and what changed?"</em> —
+      is answered with citations to the governing manual edition in force at each date.
+    </p>
+
+    <h2>The public-only guarantee</h2>
+    <p>
+      The full Methodex corpus mixes public-domain US-federal-government material
+      (servable verbatim) with in-copyright international and academic sources
+      (digest-only). <strong>This hosted instance runs with
+      <code>METHODEX_PUBLIC_ONLY=1</code></strong>. The canonical in-memory stores
+      are filtered once at load to public-domain documents and the events,
+      measures, and statistics derived from them — so <em>every</em> page, API
+      response, and download serves <strong>only</strong> the public-domain layer.
+      No in-copyright, international, academic, or unknown-producer material can
+      appear anywhere on this site. Legal basis: <strong>17 U.S.C. §105</strong>
+      (works of the U.S. federal government are not subject to copyright).
+    </p>
+
+    <h2>What's served here</h2>
+    <ul class="facts">
+      <li><strong>{{ status.documents }}</strong> public-domain documents</li>
+      <li><strong>{{ status.events }}</strong> cited revision events</li>
+      <li><strong>{{ status.statistic_entities }}</strong> statistics catalogued
+          (<strong>{{ status.statistics_with_events }}</strong> with served revision histories)</li>
+      <li><strong>{{ status.measures }}</strong> published measures/tables</li>
+      <li><strong>{{ status.verified_events }}</strong> adversarially-verified events</li>
+    </ul>
+
+    <h2>Data &amp; code for the data scientist</h2>
+    <p>
+      Every view offers a machine-readable download and a view-the-code link.
+      Pull the whole public layer as one bundle, or filter by statistic.
+    </p>
+    <ul class="facts">
+      <li><a href="/download/bundle.zip">Full public-data bundle (ZIP)</a> — all datasets (CSV) with README</li>
+      <li><a href="/download/statistics.csv">statistics.csv</a></li>
+      <li><a href="/download/revision_events.csv">revision_events.csv</a></li>
+      <li><a href="/download/documents.csv">documents.csv</a></li>
+      <li><a href="https://github.com/andenick/methodex">Source code repository</a></li>
+    </ul>
+
+    <h2>Privacy &amp; telemetry</h2>
+    <p>
+      This site emits privacy-first usage telemetry conforming to the
+      <strong>Carson Telemetry Standard v1.0</strong>: one event per request with
+      a <em>daily-salted, truncated hash</em> of the client IP — no raw IP, no
+      PII, no cookies, no consent banner. Aggregate counts answer "what is used,
+      how often"; they cannot track a person across days or sites.
+    </p>
+
+    <h2>Methodology &amp; the MCP</h2>
+    <p>
+      The same data also powers the Methodex <strong>MCP server</strong>
+      (<code>get_methodology(statistic, as_of_date)</code> and 12 sibling tools),
+      so an LLM can answer methodology questions with provenance. This website is
+      the public, browsable face of that corpus.
+    </p>
+  </div>
+</main>
+{% endblock %}

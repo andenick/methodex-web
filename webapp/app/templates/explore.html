@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Explore — {{ site_title }}{% endblock %}
+{% block description %}Search or browse the U.S. statistics that carry cited, dated methodology revision histories — each with an interactive timeline of its construction changes and the governing documents in force.{% endblock %}
+{% block content %}
+<main class="content">
+  <div class="container">
+    <h1>Methodology Explorer</h1>
+    <p class="lede">Search or browse {{ n_total }} statistics with cited revision
+      histories. Pick one to see its interactive timeline and governing documents.</p>
+
+    <form class="explore-controls" method="get" action="/explore">
+      <input type="search" name="q" value="{{ q }}" placeholder="Search a statistic — e.g. CPI, GDP, payroll, housing…" autofocus>
+      <select name="family" onchange="this.form.submit()">
+        <option value="">All families</option>
+        {% for f in families %}
+        <option value="{{ f.family }}" {{ 'selected' if f.family == active_family }}>{{ f.family }} ({{ f.n }})</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn primary">Search</button>
+      {% if q or active_family %}<a class="btn ghost" href="/explore">Clear</a>{% endif %}
+    </form>
+
+    <p class="result-count">{{ statistics|length }} statistic{{ '' if statistics|length == 1 else 's' }} shown.</p>
+
+    <div class="stat-table-wrap">
+      <table class="stat-table" data-arktable>
+        <thead>
+          <tr><th>Statistic</th><th>Family</th><th>Producer</th><th class="num">Revision events</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for s in statistics %}
+          <tr>
+            <td>
+              <a href="/statistic/{{ s.statistic_id }}"><strong>{{ s.name }}</strong></a>
+              <div class="sid"><code>{{ s.statistic_id }}</code></div>
+              {% if s.aliases %}<div class="aliases">{{ s.aliases | join(' · ') }}</div>{% endif %}
+            </td>
+            <td><span class="tag">{{ s.family }}</span></td>
+            <td>{{ s.producer_id or '—' }}</td>
+            <td class="num">{{ s.n_events }}</td>
+            <td><a class="btn small" href="/statistic/{{ s.statistic_id }}">Timeline &rarr;</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if not statistics %}
+    <p class="empty">No statistics match. <a href="/explore">Show all</a>.</p>
+    {% endif %}
+
+    <p class="dl-note">
+      Download the full statistics index:
+      <a href="/download/statistics.csv">CSV</a> &nbsp;|&nbsp;
+      all revision events:
+      <a href="/download/revision_events.csv">CSV</a> &nbsp;|&nbsp;
+      <a href="/code">view the code</a>
+    </p>
+  </div>
+</main>
+{% endblock %}

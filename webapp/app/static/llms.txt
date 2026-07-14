@@ -1,0 +1,19 @@
+# Methodex
+
+> https://methodex.fyi
+
+A public-domain economic-methodology layer — also an MCP API at mcp.methodex.fyi.
+
+Generated from ecosystem.json (kit v2.0).
+
+## Resources
+
+- Data: https://methodex.fyi/download/bundle.zip — 108.5 KB; formats: csv; kind: bundle
+- Code: https://methodex.fyi/download/site_repro.zip — languages: python; license: MIT; kind: bundle
+- Outputs: https://methodex.fyi/docs — Docs
+- License: code MIT
+- Citation: Anderson, N. (2026). Methodex. https://methodex.fyi.
+## Agents (MCP)
+
+- MCP endpoint (agents): mcp.methodex.fyi — 13 tools over Streamable-HTTP MCP. Point your LLM at this endpoint and query methodology directly; the killer query is a tool: get_methodology. The transport requires the header `Accept: text/event-stream`, so a plain browser GET returns 406 by design — this is a machine endpoint, not a web page.
+- MCP connection snippet: https://methodex.fyi/code

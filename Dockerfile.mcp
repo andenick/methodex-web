@@ -1,0 +1,33 @@
+# Methodex MCP server — box deploy variant (carson-telemetry vendored).
+# Serves the methodex methodology tools over the Streamable-HTTP MCP transport
+# on 0.0.0.0:8000. PUBLIC-ONLY layer only (METHODEX_PUBLIC_ONLY=1, also forced
+# by the public-domain filter applied at import time in methodex_mcp.py).
+# Route (later agent step): mcp.methodex.fyi -> methodex-mcp:8000 (MCP path /mcp).
+FROM python:3.13-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/app/Methodex/src \
+    METHODEX_PUBLIC_ONLY=1 \
+    METHODEX_MCP_HOST=0.0.0.0 \
+    METHODEX_MCP_PORT=8000
+
+WORKDIR /app
+
+# Reuse the web image's dependency closure (minus carson-telemetry, vendored
+# below) so the shared query code imports identically, then add the MCP SDK.
+# carson-telemetry (first-party analytics) is OPTIONAL and not bundled in this
+# public repo; build without it and add only the MCP SDK.
+COPY webapp/requirements.txt /app/webapp/requirements.txt
+RUN grep -v '^carson-telemetry' /app/webapp/requirements.txt > /tmp/req.txt && \
+    pip install --no-cache-dir -r /tmp/req.txt && \
+    pip install --no-cache-dir "mcp>=1.9.0"
+
+# Canonical tool module + HTTP entrypoint + public-domain state.
+# methodex_mcp.py resolves its state dir relative to itself (../Technical/campaign/state).
+COPY src/methodex_mcp.py       /app/Methodex/src/methodex_mcp.py
+COPY src/methodex_mcp_http.py  /app/Methodex/src/methodex_mcp_http.py
+COPY Technical/campaign/state  /app/Methodex/Technical/campaign/state
+
+EXPOSE 8000
+CMD ["python", "/app/Methodex/src/methodex_mcp_http.py"]

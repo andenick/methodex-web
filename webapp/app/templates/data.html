@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Data downloads — {{ site_title }}{% endblock %}
+{% block description %}Download the Methodex public-domain methodology data — statistics, revision events, and governing documents — as CSV with schema notes and a bulk ZIP.{% endblock %}
+{% block content %}
+<main class="content">
+  <div class="container prose">
+    <h1>Data</h1>
+    <p class="lede">
+      The complete public-domain methodology layer, downloadable with correct
+      content-types: <strong>{{ status.documents }}</strong> documents,
+      <strong>{{ status.events }}</strong> revision events, and
+      <strong>{{ status.statistic_entities }}</strong> catalogued statistics
+      (<strong>{{ status.statistics_with_events }}</strong> with served
+      revision-event data) — three datasets as CSV and a bulk ZIP.
+    </p>
+    <div class="dl-note">
+      <strong>Public-domain only.</strong> Every byte served here is a US-federal
+      government work (public domain under 17 U.S.C. §105). In-copyright
+      international / academic sources are <em>digest-only</em> in the research
+      corpus and are <strong>not</strong> served here. See
+      <a href="/methodology">Methodology</a> for sources, construction, and limits.
+    </div>
+  </div>
+
+  <!-- Bulk + manifest --------------------------------------------------- -->
+  <div class="container prose">
+    <h2>Download everything</h2>
+    <p>One ZIP of all three datasets (CSV) with a README and the
+       public-only license note, plus the reproducible site source.</p>
+    <p class="ark-btn-group">
+      <a class="ark-btn" href="/download/bundle.zip">methodex_public_data.zip</a>
+      <a class="ark-btn ark-btn-outline" href="/download/site_repro.zip">site repro bundle (.zip)</a>
+    </p>
+  </div>
+
+  <!-- Per-dataset schema notes ------------------------------------------ -->
+  {% for d in datasets %}
+  <div class="container prose">
+    <h2>{{ d.title }}</h2>
+    <p>{{ d.desc }}</p>
+    <p class="ark-download">
+      <span class="ark-download-label">Download</span>
+      <a href="{{ d.csv }}">CSV</a>
+    </p>
+    {% if d.filter %}
+    <p class="muted" style="font-size:.9rem;">
+      Filterable by statistic — e.g.
+      <code>{{ d.csv }}{{ d.filter }}</code>.
+    </p>
+    {% endif %}
+    <div class="ark-table-wrap">
+      <table class="ark-table">
+        <caption>Schema — {{ d.title | lower }} ({{ d.fields | length }} fields)</caption>
+        <thead><tr><th>Field</th><th>Notes</th></tr></thead>
+        <tbody>
+          {% for name, note in d.fields %}
+          <tr>
+            <td class="mono">{{ name }}</td>
+            <td style="text-align:left;white-space:normal;">{{ note }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="container prose">
+    <p class="muted">Tip: the same statistics and events power the interactive
+       timelines on <a href="/explore">Explore</a>, and every download here is
+       produced by the code shown on the <a href="/code">Code</a> page.</p>
+  </div>
+</main>
+{% endblock %}

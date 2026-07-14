@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Secrets / local config
+.env
+.env.*
+*.local
+
+# Telemetry (optional first-party analytics; not bundled in this public repo)
+webapp/vendor/
+*.telemetry.db
+telemetry.db
+
+# Internal data-construction campaign state is NOT shipped. Only the four
+# public-domain-filtered corpus files under Technical/campaign/state/ are tracked
+# (methodology_documents.json, revision_events.json, statistics.json, measures.json).
+Technical/campaign/state/*.bak
+Technical/campaign/state/discovery/
+Technical/campaign/state/events/
+Technical/campaign/state/wishlist_shards/
+Technical/campaign/state/*wishlist*
+Technical/campaign/state/*WISHLIST*
+Technical/campaign/state/acquisition_log*
+Technical/campaign/state/campaign_state.json
+
+# OS / editor
+.DS_Store
+Thumbs.db

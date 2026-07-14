@@ -1,0 +1,445 @@
+[
+ {
+  "table_id": "BEA.NIPA.T1.1.1",
+  "title": "Percent Change From Preceding Period in Real Gross Domestic Product",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Quarterly/annual real GDP growth rates (percent change, SAAR) by component",
+  "key_series": [
+   "Real GDP %chg",
+   "PCE",
+   "gross private domestic investment",
+   "net exports",
+   "government"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.1.2",
+  "title": "Contributions to Percent Change in Real Gross Domestic Product",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "How much each demand component adds to (subtracts from) real GDP growth",
+  "key_series": [
+   "Contributions: PCE",
+   "investment",
+   "net exports",
+   "government to real GDP %chg"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.1.3",
+  "title": "Real Gross Domestic Product, Quantity Indexes",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Chain-type quantity indexes for GDP and its components (index, base=100)",
+  "key_series": [
+   "Quantity index: GDP",
+   "PCE",
+   "investment",
+   "net exports",
+   "government"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.1.6",
+  "title": "Real Gross Domestic Product, Chained Dollars",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "GDP and components in real (chained) dollars - the master real-GDP level table",
+  "key_series": [
+   "Real GDP",
+   "real PCE",
+   "real investment",
+   "real net exports",
+   "real government"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.2.1",
+  "title": "Percent Change From Preceding Period in Real Gross Domestic Product by Major Type of Product",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Real growth rates of GDP split by goods / services / structures",
+  "key_series": [
+   "Real %chg: goods",
+   "services",
+   "structures"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.2.2",
+  "title": "Contributions to Percent Change in Real Gross Domestic Product by Major Type of Product",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Goods/services/structures contributions to real GDP growth",
+  "key_series": [
+   "Contributions: goods",
+   "services",
+   "structures"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.2.3",
+  "title": "Real Gross Domestic Product by Major Type of Product, Quantity Indexes",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Quantity indexes for GDP by major product type",
+  "key_series": [
+   "Quantity index: goods",
+   "services",
+   "structures"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.2.6",
+  "title": "Real Gross Domestic Product by Major Type of Product, Chained Dollars",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Real (chained-dollar) GDP by goods / services / structures",
+  "key_series": [
+   "Real GDP: goods",
+   "services",
+   "structures"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.3.6",
+  "title": "Real Gross Value Added by Sector, Chained Dollars",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Real value added by sector (business, household, government)",
+  "key_series": [
+   "Real GVA: business",
+   "households & institutions",
+   "general government"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.4.6",
+  "title": "Real Gross Domestic Product, Gross Domestic Purchases, and Final Sales to Domestic Purchasers, Chained Dollars",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Same reconciliation in real chained dollars",
+  "key_series": [
+   "Real GDP",
+   "real gross domestic purchases",
+   "real final sales"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.5.6",
+  "title": "Real Gross Domestic Product, Expanded Detail, Chained Dollars",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Expanded-detail GDP in real chained dollars",
+  "key_series": [
+   "Real GDP expanded detail"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T1.7.6",
+  "title": "Real Gross Domestic Product, Real Gross National Product, and Real Net National Product, Chained Dollars",
+  "producer_id": "BEA",
+  "section": "Section 1 - Domestic Product and Income",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Real GDP, GNP, NNP in chained dollars",
+  "key_series": [
+   "Real GDP",
+   "real GNP",
+   "real NNP"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect1_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.T7.1",
+  "title": "Selected Per Capita Product and Income Series in Current and Chained Dollars",
+  "producer_id": "BEA",
+  "section": "Section 7 - Supplemental Tables",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "Per-capita GDP, GNP, DPI, PCE in current and chained dollars + population",
+  "key_series": [
+   "Per capita GDP",
+   "per capita real DPI",
+   "per capita PCE",
+   "population"
+  ],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [],
+  "provenance": {
+   "source_url": "https://www.econstats.com/nipa/NIPASect7_index.htm",
+   "retrieved_at": null
+  }
+ },
+ {
+  "table_id": "BEA.NIPA.SYSTEM",
+  "title": "NIPA Table System (structure-wide changes)",
+  "producer_id": "BEA",
+  "section": "all",
+  "statistic_ids": [
+   "US.BEA.GDP.REAL"
+  ],
+  "presents": "System-wide NIPA table-structure changes across comprehensive revisions",
+  "key_series": [],
+  "first_appearance": null,
+  "last_appearance": null,
+  "line_item_history": [
+   {
+    "effective_date": "1996-01",
+    "change": "Featured real-output and price measures switched from fixed-weighted (1987-base) indexes to chain-type annual-weighted Fisher Ideal indexes; ends periodic rebasing/rewriting of history",
+    "revision_event_id": "US.BEA.GDP.REAL@1996#1",
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "1996-01",
+    "change": "Introduced chained-dollar (dollar-denominated) series and contributions-to-percent-change tables alongside index numbers; chained dollars not additive away from reference year",
+    "revision_event_id": "US.BEA.GDP.REAL@1996#1",
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "1996-01",
+    "change": "Government purchases of structures and equipment reclassified as government investment (capital), separating government consumption from gross investment",
+    "revision_event_id": "US.BEA.GDP.REAL@1996#1",
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "1996-01",
+    "change": "Improved empirical basis for depreciation and capital-stock estimates incorporated (geometric depreciation)",
+    "revision_event_id": "US.BEA.GDP.REAL@1996#1",
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2003-12",
+    "change": "Introduced a new NIPA table organization and numbering system grouping measures for a given set of components and easing addition of new tables (basis of the modern x.y.z scheme)",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2003-12",
+    "change": "Reference year for chain-type quantity/price indexes and chained-dollar estimates updated from 1996 to 2000",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2003-12",
+    "change": "A portion of the implicit services of commercial banks reallocated to borrowers (not only depositors), changing imputed-bank-services line items",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2003-12",
+    "change": "Implicit services of property & casualty insurance recognized; treatment of insured losses improved (catastrophic losses no longer treated as current losses)",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2003-12",
+    "change": "National income redefined to include all net incomes; 'indirect business taxes' renamed 'taxes on production and imports'",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2003-12",
+    "change": "Added special analytical revision tables (1A, 2A, 4A, 1B, 7A-7C) comparing revised vs previously published GDP, contributions, and price indexes",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2003-12",
+    "change": "Industry estimates rebased on North American Industry Classification System (NAICS) replacing SIC",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2009-07",
+    "change": "Introduced a new, more detailed PCE classification system (function-based categories) replacing the prior product-type structure",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2009-07",
+    "change": "New treatment of disasters: value of irreparable damage to / destruction of fixed assets no longer recorded as consumption of fixed capital (CFC)",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2009-07",
+    "change": "Reference year for chained-dollar and index estimates updated to 2005; incorporated 2002 benchmark input-output accounts",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2023-09",
+    "change": "Reference year for output and price (chained-dollar/index) measures updated from 2012 to 2017",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2023-09",
+    "change": "Industry classification updated to 2017 NAICS; equity REITs reclassified from 'funds, trusts, and other financial vehicles' to the real estate industry (mortgage REITs stay)",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2023-09",
+    "change": "Regulated investment companies (RICs) output measure changed from imputed interest paid to shareholders to an imputed charge to shareholders, affecting profit/dividend lines",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2023-09",
+    "change": "Fixed-asset tables added detail: new domestic/foreign light trucks, alternative electric structures, and investment by industry",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2023-09",
+    "change": "Foreign-trade tables expanded with additional series and consolidation of series previously only in underlying tables",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2023-09",
+    "change": "Housing-services (owner-occupied/tenant rent) PCE methodology improved using American Community Survey microdata to separate rental value from utility costs",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "1994-11",
+    "change": "First R&D satellite account established (Carson, Moylan & Grimm) defining R&D-as-investment framework outside the core accounts",
+    "revision_event_id": null,
+    "source_document_md5": null
+   },
+   {
+    "effective_date": "2007-10",
+    "change": "2007 R&DSA update added industry detail (13 R&D-intensive industries), removed R&D/software double-count, added profit-margin and international adjustments",
+    "revision_event_id": null,
+    "source_document_md5": null
+   }
+  ],
+  "provenance": {
+   "source_url": null,
+   "retrieved_at": null
+  }
+ }
+]

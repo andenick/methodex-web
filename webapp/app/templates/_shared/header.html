@@ -1,0 +1,137 @@
+{#- ===========================================================================
+Arcanum Site Kit (ASK) v1.2 — partials/header.html (Jinja2 include)
+For FastAPI+Jinja stacks: leontief, methodex, gerhard, lewis, volcker, leonid,
+freenic, shaikh.
+
+Vendoring: copy arcanum.css + arcanum-chrome.js + ecosystem.json into the
+site's static dir (served at /static/_shared/). Then in base.html
+
+<head>:
+  <link rel="stylesheet" href="/static/_shared/arcanum.css">
+  <link rel="stylesheet" href="/static/_shared/theme.css"> (2-line accent override)
+  <link rel="icon" href="/static/_shared/favicon.svg" type="image/svg+xml">
+  ...and where the header belongs (top of
+
+<body>):
+  {% include "_shared/header.html" %}
+  ...and the chrome enhancer just before </body> (see footer.html).
+
+Expected template variables (all optional except site_title; provide via a
+context processor so every route has them):
+site_key str ecosystem.json site.key (e.g. "volcker") -> switcher "current"
+site_title str display name shown next to the brand (e.g. "Volcker")
+site_home str url/path the site title links to (default "/")
+hub_url str default "https://heterodata.org"
+nav list [{label, href, active(bool)}] blueprint vocabulary
+ecosystem dict parsed ecosystem.json (for the no-JS switcher) — recommended
+============================================================================ -#}
+{%- set hub_url = hub_url | default("https://heterodata.org", true) -%}
+{%- set site_home = site_home | default("/", true) -%}
+{#- No-FOUC: apply the saved theme synchronously before paint. -#}
+<script>(function () { try { var s = localStorage.getItem('ark-theme'); if (s === 'dark' || s === 'light') document.documentElement.dataset.theme = s; } catch (e) { } })();</script>
+<a class="ark-skip-link" href="#ark-main">Skip to content</a>
+<header class="ark-header">
+  <div class="ark-header-inner">
+
+    {#- Brand mark -> hub (heterodata.org) -#}
+    <a class="ark-brand" href="{{ hub_url }}" aria-label="Heterodata — hub (heterodata.org)">
+      <span class="ark-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 3 4 27h5l2.4-5h9.2l2.4 5h5L16 3Zm-2.7 14L16 11l2.7 6h-5.4Z" fill="currentColor" />
+          <circle cx="16" cy="25.5" r="1.6" fill="currentColor" />
+        </svg>
+      </span>
+      <span class="ark-brand-text">
+        <span class="ark-brand-name">Heterodata</span>
+        <span class="ark-brand-sub">An Arcanum Research project</span>
+      </span>
+    </a>
+
+    {%- if site_title %}
+    <a class="ark-site-title" href="{{ site_home }}">{{ site_title }}</a>
+    {%- endif %}
+
+    {#- Ecosystem switcher: <details> = works with NO JavaScript.
+      arcanum-chrome.js only re-populates if the menu is empty. -#}
+      <details class="ark-switcher">
+        <summary aria-label="Switch site within the Heterodata ecosystem">
+          <span>{{ site_title | default("Ecosystem", true) }}</span>
+          <span class="ark-caret" aria-hidden="true">&#9662;</span>
+        </summary>
+        {#- v1.5 dropdown: Hub first, then live sites A-Z, then "In progress"
+        (draft/roadmap), then "Affiliated", then Architect. ONE row per site;
+        `hub_only` sites (Files) are skipped. Must match arcanum-chrome.js. -#}
+        <div class="ark-switcher-menu" role="menu">
+          {%- if ecosystem and ecosystem.sites %}
+          {%- if ecosystem.anchors and ecosystem.anchors.hub %}
+          <a class="ark-switcher-item" href="{{ ecosystem.anchors.hub.url }}" role="menuitem">
+            <span class="ark-dot" aria-hidden="true"></span>
+            <span class="ark-si-name">Hub</span>
+            <span class="ark-si-host">{{ ecosystem.anchors.hub.name }}</span>
+          </a>
+          {%- endif %}
+          {%- set visible = ecosystem.sites | rejectattr("hub_only") | list %}
+          {%- set wip = [] %}{%- set aff = [] %}{%- set live = [] %}
+          {%- for s in visible %}
+          {%- if s.affiliated %}{% set _ = aff.append(s) %}
+          {%- elif s.draft or s.roadmap %}{% set _ = wip.append(s) %}
+          {%- else %}{% set _ = live.append(s) %}
+          {%- endif %}
+          {%- endfor %}
+          {%- macro site_row(s) %}
+          {%- set planned = (s.status == "planned") %}
+          <a class="ark-switcher-item{% if s.key == site_key %} current{% endif %}{% if planned %} ark-planned{% endif %}"
+            href="{{ s.url }}" role="menuitem" style="--ark-si-accent:{{ s.accent }}" {% if s.key==site_key
+            %}aria-current="page" {% endif %}{% if planned %} aria-disabled="true" {% endif %}>
+            <span class="ark-dot" aria-hidden="true"></span>
+            <span class="ark-si-name">{{ s.title | default(s.display, true) }}</span>
+            {%- if s.draft %}<span class="ark-si-pill">Draft</span>{% elif s.roadmap %}<span
+              class="ark-si-pill">Roadmap</span>{% endif %}
+            {%- if s.affiliated %}<span class="ark-affiliated">affiliated</span>{% endif %}
+            <span class="ark-si-host">{{ s.display | default(s.url, true) }}</span>
+          </a>
+          {%- endmacro %}
+          {%- for s in live %}{{ site_row(s) }}{% endfor %}
+          {%- if wip %}<div class="ark-switcher-group">In progress</div>
+          {%- for s in wip %}{{ site_row(s) }}{% endfor %}{% endif %}
+          {%- if aff %}<div class="ark-switcher-group">Affiliated</div>
+          {%- for s in aff %}{{ site_row(s) }}{% endfor %}{% endif %}
+          {%- if ecosystem.anchors and ecosystem.anchors.author %}
+          <a class="ark-switcher-item" href="{{ ecosystem.anchors.author.url }}" role="menuitem">
+            <span class="ark-dot" aria-hidden="true"></span>
+            <span class="ark-si-name">Architect</span>
+            <span class="ark-si-host">{{ ecosystem.anchors.author.name }}</span>
+          </a>
+          {%- endif %}
+          {%- else %}
+          {#- No ecosystem dict passed: JS will populate from ecosystem.json. -#}
+          <a class="ark-switcher-item" href="{{ hub_url }}" role="menuitem">
+            <span class="ark-dot" aria-hidden="true"></span><span class="ark-si-name">Hub</span>
+            <span class="ark-si-host">heterodata.org</span>
+          </a>
+          <a class="ark-switcher-item" href="https://nickanderson.us" role="menuitem">
+            <span class="ark-dot" aria-hidden="true"></span><span class="ark-si-name">Architect</span>
+            <span class="ark-si-host">nickanderson.us</span>
+          </a>
+          {%- endif %}
+        </div>
+      </details>
+
+      {#- Per-site nav (blueprint vocabulary) -#}
+      {%- if nav %}
+      <nav class="ark-nav" aria-label="Site sections">
+        {%- for n in nav %}
+        <a class="ark-nav-a{% if n.active %} active{% endif %}" href="{{ n.href }}" {% if n.active %}aria-current="page"
+          {% endif %}>{{ n.label }}</a>
+        {%- endfor %}
+      </nav>
+      {%- endif %}
+
+      {#- Light/dark toggle (follow system, then remember — wired by arcanum-chrome.js) -#}
+      <button type="button" class="ark-theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">
+        <span class="ark-theme-sun" aria-hidden="true">&#9728;</span><span class="ark-theme-moon"
+          aria-hidden="true">&#9790;</span>
+      </button>
+
+  </div>
+</header>

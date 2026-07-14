@@ -1,0 +1,95 @@
+{#- ===========================================================================
+   Arcanum Site Kit (ASK) v2.0 — partials/action-footer.html  (Jinja2 include)
+   THE FOOTER v2 — the "Action Footer" (CODE_DATA_FIRST_STANDARD.md §B1.2).
+   REPLACES partials/footer.html's role: one footer per page. As the top of a page
+   carries the menu, the bottom carries a useful-buttons bar:
+       compact Research Triad  +  "Website source"  +  "Cite this site"
+   ABOVE the existing MANDATED dual-anchor colophon — heterodata.org (hub) AND
+   nickanderson.us (architect) — which is preserved BYTE-FOR-BYTE from footer.html.
+
+   The action bar is hydrated by ark-triad.js from this site's ecosystem `cdf`
+   block; every element degrades gracefully (the triad + Website-source + Cite are
+   hidden until hydrated, so a not-yet-migrated site shows exactly the v1 colophon).
+
+   Usage (bottom of <body> in base.html) — swap the old include for this one:
+       {% include "_shared/action-footer.html" %}
+       <script>
+         window.ARK_CONFIG = { site_key: "{{ site_key }}", dpr_url: "{{ dpr_url | default('/methodology', true) }}",
+                               ecosystem_url: "/static/_shared/ecosystem.json" };
+         window.ARK_TRACK  = { site: "{{ site_key }}", endpoint: "/__track" };
+       </script>
+       <script src="/static/_shared/arcanum-chrome.js" defer></script>
+       <script src="/static/_shared/ark-triad.js" defer></script>
+
+   Variables — identical to footer.html (all optional, same defaults):
+     hub_url · author_url · hub_name · author_name · dpr_url · dpr_label ·
+     disclaimer · disclaimer_text · disclaimer_source
+============================================================================ -#}
+{%- set hub_url = hub_url | default("https://heterodata.org", true) -%}
+{%- set author_url = author_url | default("https://nickanderson.us", true) -%}
+{%- set hub_name = hub_name | default("heterodata.org", true) -%}
+{%- set author_name = author_name | default("nickanderson.us", true) -%}
+{%- set dpr_url = dpr_url | default("/methodology", true) -%}
+{%- set dpr_label = dpr_label | default("Provenance", true) -%}
+{%- set disclaimer = true if disclaimer is not defined else disclaimer -%}
+{%- set disclaimer_text = disclaimer_text | default("The data on this site is reconstructed for research transparency and education. It may lag official revisions or contain reconstruction error, and it is not a substitute for the original source. For authoritative figures, defer to the named original source for each dataset.", true) -%}
+<footer class="ark-footer ark-action-footer">
+  {#- ── Action bar: compact triad + Website source + Cite this site ──────── -#}
+  <div class="ark-action-bar">
+    <section class="ark-triad ark-triad-compact ark-triad--pending" data-ark-triad hidden
+             aria-label="Get the data and the code for this research">
+      <a class="ark-triad-btn ark-triad-data" data-cdf="data" href="#" aria-label="Download the data for this site">
+        <span class="ark-triad-icon" aria-hidden="true">&#8595;</span>
+        <span class="ark-triad-text">
+          <span class="ark-triad-label">Data</span>
+          <span class="ark-triad-sub" data-cdf-sub="data"></span>
+        </span>
+      </a>
+      <a class="ark-triad-btn ark-triad-code" data-cdf="code" href="#" aria-label="Download the research code for this site">
+        <span class="ark-triad-icon" aria-hidden="true">&#8595;</span>
+        <span class="ark-triad-text">
+          <span class="ark-triad-label">Code</span>
+          <span class="ark-triad-sub" data-cdf-sub="code"></span>
+        </span>
+      </a>
+      <a class="ark-triad-btn ark-triad-outputs ark-triad-secondary" data-cdf="outputs" href="#" aria-label="Explore the finished outputs of this site">
+        <span class="ark-triad-icon" aria-hidden="true">&#8594;</span>
+        <span class="ark-triad-text">
+          <span class="ark-triad-label">Outputs</span>
+          <span class="ark-triad-sub" data-cdf-sub="outputs"></span>
+        </span>
+      </a>
+    </section>
+    <div class="ark-action-tools">
+      {#- "Website source" → the site's own public GitHub repo. Rendered by
+         ark-triad.js ONLY when cdf.site_repo is non-null (never a dead button). -#}
+      <a class="ark-btn ark-btn-outline ark-btn-sm ark-action-source" data-cdf-repo href="#" hidden
+         rel="noopener" aria-label="View this website's source on GitHub">Website source</a>
+      {#- "Cite this site" — copies the citation string from the cdf block. -#}
+      <button type="button" class="ark-btn ark-btn-ghost ark-btn-sm ark-action-cite" data-cdf-cite hidden
+              aria-label="Copy a citation for this site to the clipboard">Cite this site</button>
+    </div>
+  </div>
+  {%- if disclaimer %}
+  {#- EDUCATIONAL_DISCLAIMER_STANDARD.md placement #1 (site-wide footer). Single-source; per-site opt-out via disclaimer=false. -#}
+  <p class="ark-footer-disclaimer" role="note">{{ disclaimer_text }}{% if disclaimer_source %} <span class="ark-disclaimer-source">Original source: {{ disclaimer_source }}.</span>{% endif %}</p>
+  {%- endif %}
+  {#- ── MANDATED dual-anchor colophon — preserved EXACTLY from footer.html ── -#}
+  <div class="ark-footer-inner">
+    <span><strong>Heterodata</strong> &mdash; an Arcanum Research project</span>
+    <span class="ark-sep" aria-hidden="true">&middot;</span>
+    <span>Hub: <a href="{{ hub_url }}">{{ hub_name }}</a></span>
+    <span class="ark-sep" aria-hidden="true">&middot;</span>
+    <span>Architect: <a href="{{ author_url }}">{{ author_name }}</a></span>
+    <span class="ark-sep" aria-hidden="true">&middot;</span>
+    <span class="ark-foot-badges">
+      <span class="ark-badge reproducible">Reproducible</span>
+      <span class="ark-badge offline">Offline</span>
+      <span class="ark-badge real-data">Real data</span>
+    </span>
+    {%- if dpr_url %}
+    <span class="ark-sep" aria-hidden="true">&middot;</span>
+    <a href="{{ dpr_url }}">{{ dpr_label }}</a>
+    {%- endif %}
+  </div>
+</footer>

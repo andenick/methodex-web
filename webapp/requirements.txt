@@ -1,0 +1,16 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+gunicorn==23.0.0
+jinja2==3.1.5
+python-multipart==0.0.20
+pandas==2.2.3
+numpy==2.1.3
+pyarrow==18.1.0
+plotly==5.24.1
+markdown-it-py==3.0.0
+# carson-telemetry (first-party Layer-3 analytics) is OPTIONAL and NOT bundled in
+# this public repo. app.main attaches it only if importable. Install
+# github.com/andenick/carson-telemetry separately to enable it.
+# carson-telemetry[fastapi]==1.0.0
+pytest==8.3.4
+httpx==0.28.1

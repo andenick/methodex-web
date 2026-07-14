@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}{{ stat.name }} — {{ site_title }}{% endblock %}
+{% block content %}
+<main class="content">
+  <div class="container">
+    <nav class="crumb"><a href="/explore">&larr; Explorer</a></nav>
+
+    <h1>{{ stat.name }}</h1>
+    <div class="stat-meta">
+      <code>{{ stat.statistic_id }}</code>
+      <span class="tag">{{ stat.family }}</span>
+      {% if stat.producer_id %}<span class="tag">{{ stat.producer_id }}</span>{% endif %}
+      {% if stat.first_published %}<span class="muted">first published {{ stat.first_published }}</span>{% endif %}
+      <span class="muted">{{ stat.n_events }} revision events</span>
+    </div>
+    {% if stat.aliases %}<p class="aliases">Also known as: {{ stat.aliases | join(' · ') }}</p>{% endif %}
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- Interactive revision timeline (Plotly, server-rendered JSON)  -->
+    <!-- ------------------------------------------------------------ -->
+    <section class="timeline-block">
+      <h2>Methodology revision timeline</h2>
+      <p class="muted">{{ n_dated }} dated event{{ '' if n_dated == 1 else 's' }} on the time axis
+        {% if n_undated %}· {{ n_undated }} undated (listed below){% endif %}.
+        Each point is a cited methodology change; hover for the description and source.</p>
+      <div id="timeline" class="plot"></div>
+      <script id="figure-data" type="application/json">{{ figure | tojson }}</script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var fig = JSON.parse(document.getElementById('figure-data').textContent);
+          var fn = "methodex_timeline_{{ stat.statistic_id }}".replace(/[^a-z0-9]+/gi, "_");
+          var layout = fig.layout || {};
+          if (layout.title) { layout = Object.assign({}, layout); delete layout.title; }  // the <h2> above is the title
+          var downloads = { csv: "/download/revision_events.csv?statistic_id={{ stat.statistic_id }}" };
+          if (window.ArkChart) {
+            // Single chart entry point: top-right Download CSV + downloads row + legend-below.
+            ArkChart.render('timeline', { traces: fig.data, layout: layout, downloads: downloads, filename: fn });
+          } else if (window.ArkPlotly) {
+            ArkPlotly.plot('timeline', fig.data, layout, { filename: fn });
+          } else {
+            Plotly.newPlot('timeline', fig.data, fig.layout,
+                           { responsive: true, displaylogo: false });
+          }
+        });
+      </script>
+    </section>
+
+    <p class="dl-note">
+      Download this statistic's data:
+      <a href="/download/revision_events.csv?statistic_id={{ stat.statistic_id }}">events CSV</a> &nbsp;|&nbsp;
+      <a href="/code">view the code</a>
+    </p>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- Governing documents                                           -->
+    <!-- ------------------------------------------------------------ -->
+    <section>
+      <h2>Governing documents <span class="muted">({{ governing_documents|length }})</span></h2>
+      {% if governing_documents %}
+      <table class="doc-table" data-arktable>
+        <thead><tr><th>Title</th><th>Type</th><th>Producer</th><th>Published</th></tr></thead>
+        <tbody>
+          {% for d in governing_documents %}
+          <tr>
+            <td>{{ d.title }}</td>
+            <td>{{ d.doc_type or '—' }}</td>
+            <td>{{ d.producer or '—' }}</td>
+            <td>{{ d.publication_date or '—' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="muted">No public governing manuals/handbooks linked to this statistic yet.</p>
+      {% endif %}
+    </section>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- Full event list with citations                                -->
+    <!-- ------------------------------------------------------------ -->
+    <section>
+      <h2>Revision events</h2>
+      <ol class="event-list">
+        {% for e in events %}
+        <li class="event">
+          <div class="event-head">
+            <span class="yr">{{ e.effective_year or '—' }}</span>
+            <span class="etype">{{ e.type }}</span>
+            {% if e.verified %}<span class="verified" title="adversarially verified">✓ verified</span>{% endif %}
+          </div>
+          <p class="event-desc">{{ e.description }}</p>
+          <div class="event-cite">
+            src: {{ e.citation.document }}{% if e.citation.page %} · p.{{ e.citation.page }}{% endif %}
+            {% if e.concept_ids %}<span class="concepts">{{ e.concept_ids | join(' · ') }}</span>{% endif %}
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+  </div>
+</main>
+{% endblock %}

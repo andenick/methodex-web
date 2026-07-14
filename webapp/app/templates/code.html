@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block title %}Code — {{ site_title }}{% endblock %}
+{% block description %}The real code behind methodex.fyi and its MCP server — the public-only chokepoint, the 13 MCP tools, the download serializers, and the Plotly timeline — with copy buttons and a runnable repro bundle.{% endblock %}
+{% block content %}
+<main class="content">
+  <div class="container prose">
+    <h1>Code</h1>
+    <p class="lede">
+      Everything on this site — the <a href="/explore">Explore</a> timelines, the
+      <a href="/data">Data</a> downloads, and the sibling MCP server — is produced
+      by the FastAPI + Jinja + (vendored) Plotly app and the canonical query module
+      below. The snippets here are <strong>verbatim from the running source</strong>.
+    </p>
+    <div class="dl-note">
+      <strong>Run it, get identical output.</strong> Every <code>/download/*</code>
+      payload and every <code>/api/*</code> response is computed
+      <em>deterministically</em> from the canonical public-only store — no hidden
+      state, no network call, no random seed. Install the pinned deps, run
+      <code>uvicorn app.main:app</code>, and the timelines and download bytes
+      regenerate byte-for-byte.
+    </div>
+    <p class="ark-btn-group">
+      <a class="ark-btn" href="/download/site_repro.zip">Download repro bundle (.zip)</a>
+      <a class="ark-btn ark-btn-outline" href="/download/bundle.zip">Public data bundle (.zip)</a>
+      <a class="ark-btn ark-btn-ghost" href="https://github.com/andenick/methodex">View on GitHub &rarr;</a>
+    </p>
+  </div>
+
+  <!-- 1. The public-only chokepoint ------------------------------------- -->
+  <div class="container prose">
+    <h2>1 · The public-only chokepoint</h2>
+    <p>One module touches the corpus. It imports <code>app.config</code> first
+       (which forces <code>METHODEX_PUBLIC_ONLY=1</code> before
+       <code>methodex_mcp</code> loads), then asserts every loaded document is
+       public domain — the import <strong>fails closed</strong> otherwise.</p>
+    <div class="ark-code" data-arkcode data-filename="methodex_public_only">
+      <div class="ark-code-head"><span class="ark-code-path">webapp/app/services/methodex_service.py</span></div>
+      <pre data-lang="python"><code>{% filter forceescape %}{% raw %}from app import config as C  # import-for-side-effect: forces public-only
+
+if str(C.SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(C.SRC_DIR))
+
+import methodex_mcp as M
+
+# Hard assertion: the bridge must be in public-only mode.
+assert M.PUBLIC_ONLY, (
+    "methodex_mcp loaded WITHOUT public-only mode — refusing to serve. "
+    "app.config must be imported before methodex_mcp."
+)
+assert all(
+    (d.get("provenance") or {}).get("license") == C.PUBLIC_DOMAIN_LICENSE
+    for d in M.DOCSL
+), "Non-public document found in the loaded store — public carve breached."{% endraw %}{% endfilter %}</code></pre>
+    </div>
+  </div>
+
+  <!-- 2. The MCP tools -------------------------------------------------- -->
+  <div class="container prose">
+    <h2>2 · The MCP server (13 tools, same corpus)</h2>
+    <p>The website is the browsable face of a Methodex MCP server: an LLM can ask
+       <code>get_methodology(statistic, as_of_date)</code> and get a cited answer.
+       The 13 canonical tools are defined once and registered over
+       streamable-HTTP — they serve the same public-only store.</p>
+    <div class="ark-code" data-arkcode data-filename="methodex_tools">
+      <div class="ark-code-head"><span class="ark-code-path">src/methodex_mcp.py</span></div>
+      <pre data-lang="python"><code>{% filter forceescape %}{% raw %}TOOLS = [resolve_statistic, get_methodology, get_revision_history, diff_methodology,
+         search_methodology, get_document, get_concept_history, get_table_history, list_measures,
+         get_vintage_data, get_methodology_timeline, methodex_status, semantic_search]{% endraw %}{% endfilter %}</code></pre>
+    </div>
+    <div class="ark-code" data-arkcode data-filename="methodex_mcp_http">
+      <div class="ark-code-head"><span class="ark-code-path">src/methodex_mcp_http.py</span></div>
+      <pre data-lang="python"><code>{% filter forceescape %}{% raw %}from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("Methodex", host=host, port=port)
+for fn in mx.TOOLS:
+    mcp.tool()(fn)
+mcp.run(transport="streamable-http")   # MCP endpoint path: /mcp{% endraw %}{% endfilter %}</code></pre>
+    </div>
+  </div>
+
+  <!-- 3. The download serializers (correct content-types) --------------- -->
+  <div class="container prose">
+    <h2>3 · The downloads (correct content-types)</h2>
+    <p>The <a href="/data">Data</a> page serves three datasets as CSV. Each
+       carries its true media type — the known "CSV-served-as-JSON" failure
+       is avoided by attaching the content-type at export time.</p>
+    <div class="ark-code" data-arkcode data-filename="methodex_download_service">
+      <div class="ark-code-head"><span class="ark-code-path">webapp/app/services/download_service.py</span></div>
+      <pre data-lang="python"><code>{% filter forceescape %}{% raw %}_CSV = "text/csv; charset=utf-8"
+
+def export_dataset(name: str, fmt: str, statistic_id: str | None = None):
+    """Export a named public dataset as csv. Raises KeyError/ValueError."""
+    if name not in _FRAMES:
+        raise KeyError(f"unknown dataset '{name}' (have: {sorted(_FRAMES)})")
+    if fmt != "csv":
+        raise ValueError(f"unsupported format '{fmt}' (csv)")
+
+    builder = _FRAMES[name]
+    df = builder(statistic_id) if name in ("statistics", "revision_events") else builder()
+
+    suffix = f"_{statistic_id}" if statistic_id else ""
+    raw = df.to_csv(index=False).encode("utf-8")
+    return raw, _CSV, f"methodex_{name}{suffix}.csv"{% endraw %}{% endfilter %}</code></pre>
+    </div>
+  </div>
+
+  <!-- 4. The Plotly timeline (server-rendered, vendored, offline) -------- -->
+  <div class="container prose">
+    <h2>4 · The revision timeline (vendored Plotly, offline)</h2>
+    <p>Each statistic's timeline is built server-side into a Plotly figure dict and
+       hydrated in-page with the vendored Plotly build — no CDN, no runtime fetch.
+       Every point is a real, cited revision event.</p>
+    <div class="ark-code" data-arkcode data-filename="methodex_timeline">
+      <div class="ark-code-head"><span class="ark-code-path">webapp/app/services/methodex_service.py</span></div>
+      <pre data-lang="python"><code>{% filter forceescape %}{% raw %}import plotly.graph_objects as go
+
+dated = [e for e in events if e.get("effective_year")]
+types = sorted({e["type"] for e in dated})
+
+fig = go.Figure()
+for t in types:
+    pts = [e for e in dated if e["type"] == t]
+    fig.add_trace(go.Scatter(
+        x=[e["effective_year"] for e in pts],
+        y=[t for _ in pts], mode="markers", name=t,
+        customdata=[[e["event_id"], (e.get("description") or "")[:240],
+                     (e.get("citation") or {}).get("document", ""),
+                     "verified" if e.get("verified") else "unverified"] for e in pts],
+        hovertemplate="<b>%{x}</b> · " + t + "<br>%{customdata[1]}"
+                      "<br><i>src: %{customdata[2]}</i><br>(%{customdata[3]})<extra></extra>",
+    ))
+return {"figure": fig.to_plotly_json(), "events": events}{% endraw %}{% endfilter %}</code></pre>
+    </div>
+  </div>
+
+  <!-- 5. The landing coverage API --------------------------------------- -->
+  <div class="container prose">
+    <h2>5 · The landing chart API</h2>
+    <p>The default chart on the <a href="/">home page</a> reads this endpoint, which
+       rolls up real public events live from the store (so it always matches the
+       rest of the site).</p>
+    <div class="ark-code" data-arkcode data-filename="methodex_coverage_api">
+      <div class="ark-code-head"><span class="ark-code-path">webapp/app/routers/api.py</span></div>
+      <pre data-lang="python"><code>{% filter forceescape %}{% raw %}@router.get("/coverage")
+def coverage() -> JSONResponse:
+    stats = S.statistics_with_events()
+    by_family: dict[str, int] = {}
+    for s in stats:
+        by_family[s["family"]] = by_family.get(s["family"], 0) + s["n_events"]
+    top = sorted(stats, key=lambda s: (-s["n_events"], s["name"]))[:15]
+    return JSONResponse({
+        "top_statistics": [{"name": s["name"], "statistic_id": s["statistic_id"],
+                            "family": s["family"], "n_events": s["n_events"]} for s in top],
+        "by_family": sorted(({"family": f, "events": n} for f, n in by_family.items()),
+                            key=lambda x: (-x["events"], x["family"])),
+        "n_total_events": sum(s["n_events"] for s in stats),
+        "n_statistics": len(stats),
+    }){% endraw %}{% endfilter %}</code></pre>
+    </div>
+    <p class="muted">See <a href="/methodology">Methodology</a> for the full source
+       map and the public-only guarantee these snippets enforce.</p>
+  </div>
+
+  <!-- 6. Reproduce a figure from the public CSV (R + Python) ------------- -->
+  <!-- Carson DNA A6: a boxed, copyable, R<->Python toggleable transform     -->
+  <!-- over the REAL published download — no fabricated logic, both faithful. -->
+  <div class="container prose">
+    <h2>6 · Reproduce the coverage chart yourself (R + Python)</h2>
+    <p>Everything above is the app's own plumbing. To check the numbers without
+       running the app, read the published
+       <a href="/download/revision_events.csv">revision-events CSV</a> directly and
+       roll it up — the same count behind the landing
+       <a href="/">coverage chart</a>. Switch between <strong>R</strong> and
+       <strong>Python</strong> with the toggle; point <code>events_url</code> at the
+       downloaded file or the live URL.</p>
+    <div class="ark-code" data-arkcode data-filename="methodex_coverage_repro" data-default="r">
+      <div class="ark-code-head">
+        <span class="ark-code-path">events per statistic family, from the public CSV</span>
+      </div>
+      <pre data-lang="r"><code>{% filter forceescape %}{% raw %}# Methodology revision events per statistic family, from the public CSV.
+# Each row is one dated, cited methodology change (the site's unit of analysis).
+#
+# DATA:   point events_url at the published revision-events download.
+# CHANGE: the grouping column (e.g. `type` instead of `family`).
+
+events_url <- "https://methodex.fyi/download/revision_events.csv"
+
+ev <- read.csv(events_url, stringsAsFactors = FALSE)
+
+# count events per statistic family, most-revised first
+by_family <- as.data.frame(table(family = ev$family), stringsAsFactors = FALSE)
+by_family <- by_family[order(-by_family$Freq), ]
+names(by_family)[2] <- "n_events"
+
+cat(sprintf("total cited revision events: %d\n", nrow(ev)))
+print(head(by_family, 10), row.names = FALSE){% endraw %}{% endfilter %}</code></pre>
+      <pre data-lang="python"><code>{% filter forceescape %}{% raw %}# Methodology revision events per statistic family, from the public CSV.
+# Each row is one dated, cited methodology change (the site's unit of analysis).
+#
+# DATA:   point events_url at the published revision-events download.
+# CHANGE: the grouping column (e.g. "type" instead of "family").
+import pandas as pd
+
+events_url = "https://methodex.fyi/download/revision_events.csv"
+
+ev = pd.read_csv(events_url)
+
+# count events per statistic family, most-revised first
+by_family = (ev.groupby("family").size()
+               .rename("n_events").reset_index()
+               .sort_values("n_events", ascending=False))
+
+print(f"total cited revision events: {len(ev)}")
+print(by_family.head(10).to_string(index=False)){% endraw %}{% endfilter %}</code></pre>
+    </div>
+    <p class="muted">Both read the same public-domain CSV and produce the same
+       family ranking. The full datasets (statistics, revision events, documents)
+       are on the <a href="/data">Data</a> page.</p>
+  </div>
+</main>
+{% endblock %}

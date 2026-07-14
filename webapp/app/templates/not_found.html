@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Not found — {{ site_title }}{% endblock %}
+{% block content %}
+<main class="content">
+  <div class="container prose">
+    <h1>Not found</h1>
+    <p>{{ message }}</p>
+    <p><a class="btn primary" href="/explore">Back to the Explorer</a></p>
+  </div>
+</main>
+{% endblock %}

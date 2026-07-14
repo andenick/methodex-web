@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Documents — {{ site_title }}{% endblock %}
+{% block description %}Browse the public-domain US-federal-government governing documents — statistical manuals, handbooks, and release notes — served verbatim under 17 U.S.C. §105 and cited by every methodology revision event.{% endblock %}
+{% block content %}
+<main class="content">
+  <div class="container">
+    <h1>Public-domain methodology documents</h1>
+    <p class="lede">{{ n_corpus }} public-domain US-federal-government documents
+      (manuals, handbooks, releases). Servable verbatim under 17 U.S.C. §105.
+      {% if q or active_producer %}{{ n_total }} match your filter. {% endif %}
+      Showing {{ page_first }}–{{ page_last }} of {{ n_total }}.</p>
+
+    <form class="explore-controls" method="get" action="/docs">
+      <input type="search" name="q" value="{{ q }}" placeholder="Search document titles…">
+      <select name="producer" onchange="this.form.submit()">
+        <option value="">All producers</option>
+        {% for p in producers %}
+        <option value="{{ p }}" {{ 'selected' if p == active_producer }}>{{ p }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn primary">Search</button>
+      {% if q or active_producer %}<a class="btn ghost" href="/docs">Clear</a>{% endif %}
+    </form>
+
+    <div class="doc-table-wrap">
+      <table class="doc-table" data-arktable>
+        <thead><tr><th>Title</th><th>Type</th><th>Producer</th><th>Published</th><th>License</th></tr></thead>
+        <tbody>
+          {% for d in documents %}
+          <tr>
+            <td>{{ d.title }}</td>
+            <td>{{ d.doc_type or '—' }}</td>
+            <td>{{ d.producer or '—' }}</td>
+            <td>{{ d.publication_date or '—' }}</td>
+            <td><span class="pub-badge small">{{ d.provenance.license if d.provenance else 'US-Gov public domain' }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if n_pages > 1 %}
+    {% set qs = '&q=' ~ q if q else '' %}
+    {% set ps = '&producer=' ~ active_producer if active_producer else '' %}
+    <nav class="pager" aria-label="Document pages">
+      {% if page > 1 %}
+        <a class="btn small" href="/docs?page={{ page - 1 }}{{ qs }}{{ ps }}" rel="prev">&larr; Prev</a>
+      {% else %}
+        <span class="btn small disabled" aria-disabled="true">&larr; Prev</span>
+      {% endif %}
+      <span class="pager-status">Page {{ page }} of {{ n_pages }}</span>
+      {% if page < n_pages %}
+        <a class="btn small" href="/docs?page={{ page + 1 }}{{ qs }}{{ ps }}" rel="next">Next &rarr;</a>
+      {% else %}
+        <span class="btn small disabled" aria-disabled="true">Next &rarr;</span>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+    <p class="dl-note">
+      Download the document catalogue:
+      <a href="/download/documents.csv">CSV</a> &nbsp;|&nbsp;
+      <a href="/code">view the code</a>
+    </p>
+  </div>
+</main>
+{% endblock %}

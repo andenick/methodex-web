@@ -1,0 +1,658 @@
+{
+  "_comment": "Canonical Heterodata ecosystem manifest. Single source for the header ecosystem switcher, the heterodata.org hub cards, the nickanderson.us ecosystem section, and the link-graph reciprocity check. SCHEMA v3 (kit v2.0 'Code & Data First'): every site gains a `cdf` block (data/code/outputs targets + site_repo + citation + llms_txt) consumed by ark-triad.js for the Research Triad + Action Footer; see CODE_DATA_FIRST_STANDARD.md §B2.3. cdf targets carrying `provisional:true` are seeded from the campaign §B4 matrix and finalized by each site's design brief; `cdf:null` = intentionally no triad (e.g. externally-owned sites). Additive only — all prior fields unchanged. Kit v1.3 (adds Files site, data.freenic bulk link, scrubbed taglines). Sites: Hub first, then alphabetical by title; each site lists its detailed subpages for the dropdown. A page path may be an absolute URL.",
+  "version": "3.0",
+  "kit_version": "2.0",
+  "updated": "2026-07-10",
+  "brand": {
+    "lead": "Heterodata",
+    "tagline": "An Arcanum Research project"
+  },
+  "anchors": {
+    "hub": {
+      "name": "Heterodata",
+      "url": "https://heterodata.org",
+      "role": "Research hub — front door to the data tools"
+    },
+    "author": {
+      "name": "nickanderson.us",
+      "url": "https://nickanderson.us",
+      "role": "Architect"
+    }
+  },
+  "sites": [
+    {
+      "key": "foodberg",
+      "cdf": {
+        "provisional": true,
+        "data": {
+          "href": "/downloads/data.zip",
+          "kind": "bundle",
+          "size": null,
+          "formats": [
+            "csv",
+            "xlsx",
+            "parquet"
+          ]
+        },
+        "code": {
+          "href": "/downloads/code.zip",
+          "kind": "bundle",
+          "langs": [
+            "python",
+            "typescript"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/",
+          "label": "Price Explorer"
+        },
+        "site_repo": "https://github.com/andenick/Foodberg",
+        "citation": "Anderson, N. (2026). Foodberg. https://foodberg.org.",
+        "llms_txt": true
+      },
+      "title": "Foodberg",
+      "display": "foodberg.org",
+      "url": "https://foodberg.org",
+      "accent": "#ea580c",
+      "status": "live",
+      "tagline": "Global food & commodity price explorer, drawing on USDA WASDE, FAO, and World Bank sources.",
+      "pages": [
+        {
+          "label": "Explore",
+          "path": "/"
+        },
+        {
+          "label": "Data",
+          "path": "/#data"
+        },
+        {
+          "label": "Methodology",
+          "path": "/#methodology"
+        }
+      ]
+    },
+    {
+      "key": "freenic",
+      "cdf": {
+        "provisional": true,
+        "data": {
+          "href": "/downloads/data.zip",
+          "kind": "bundle",
+          "size": null,
+          "formats": [
+            "csv",
+            "parquet"
+          ],
+          "bulk": {
+            "href": "https://data.freenic.org/",
+            "size": "13 GB",
+            "label": "Bulk release"
+          }
+        },
+        "code": {
+          "href": "/downloads/code.zip",
+          "kind": "bundle",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/explorer",
+          "label": "Explorer"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). FreeNIC. https://freenic.org.",
+        "llms_txt": true
+      },
+      "title": "FreeNIC",
+      "display": "freenic.org",
+      "url": "https://freenic.org",
+      "accent": "#64748b",
+      "status": "live",
+      "tagline": "Bank-level U.S. financial-data explorer — failures, FRED series, and active institutions; full 13 GB parquet release at data.freenic.org.",
+      "pages": [
+        {
+          "label": "Explore",
+          "path": "/explorer"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Bulk data",
+          "path": "https://data.freenic.org/"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        }
+      ]
+    },
+    {
+      "key": "gerhard",
+      "cdf": {
+        "provisional": false,
+        "data": {
+          "href": "/downloads/data.zip",
+          "kind": "bundle",
+          "size": "14 MB",
+          "formats": [
+            "csv",
+            "xlsx",
+            "parquet"
+          ]
+        },
+        "code": {
+          "href": "/downloads/code.zip",
+          "kind": "bundle",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/treasury/duration",
+          "label": "Duration study (north-star)"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). Gerhard - The History and Present of American Public Finance. https://gerhard.heterodata.org.",
+        "llms_txt": true
+      },
+      "title": "Gerhard",
+      "display": "gerhard.heterodata.org",
+      "url": "https://gerhard.heterodata.org",
+      "accent": "#15803d",
+      "status": "live",
+      "tagline": "The history and present of American public finance — taxation, spending, and debt over time.",
+      "pages": [
+        {
+          "label": "Explore",
+          "path": "/explore"
+        },
+        {
+          "label": "History",
+          "path": "/history"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        },
+        {
+          "label": "About",
+          "path": "/about"
+        }
+      ]
+    },
+    {
+      "key": "hmda",
+      "cdf": {
+        "provisional": true,
+        "data": {
+          "href": "/#data",
+          "kind": "page",
+          "size": null,
+          "formats": [
+            "csv",
+            "parquet"
+          ]
+        },
+        "code": {
+          "href": "/#code",
+          "kind": "page",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/#explore",
+          "label": "Explore"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). HMDA Explore. https://hmdaexplore.com.",
+        "llms_txt": true
+      },
+      "title": "HMDA Explore",
+      "display": "hmdaexplore.com",
+      "url": "https://hmdaexplore.com",
+      "accent": "#0891b2",
+      "status": "live",
+      "tagline": "A dashboard over the Home Mortgage Disclosure Act data on U.S. mortgage lending.",
+      "pages": [
+        {
+          "label": "Explore",
+          "path": "/#explore"
+        },
+        {
+          "label": "Data",
+          "path": "/#data"
+        },
+        {
+          "label": "Code",
+          "path": "/#code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/#methodology"
+        }
+      ]
+    },
+    {
+      "key": "jjmuni",
+      "cdf": null,
+      "title": "JJ Muni",
+      "display": "jjmuni.com",
+      "url": "https://jjmuni.com",
+      "accent": "#0ea5e9",
+      "status": "live",
+      "affiliated": true,
+      "external_owner": true,
+      "tagline": "Westchester County sidewalk-coverage web-map — pedestrian infrastructure, tract by tract.",
+      "pages": [
+        {
+          "label": "Map",
+          "path": "/"
+        }
+      ]
+    },
+    {
+      "key": "leonid",
+      "cdf": {
+        "provisional": true,
+        "data": {
+          "href": "/downloads/data.zip",
+          "kind": "bundle",
+          "size": null,
+          "formats": [
+            "csv",
+            "parquet"
+          ],
+          "note": "catalog metadata, not observations"
+        },
+        "code": {
+          "href": "/downloads/code.zip",
+          "kind": "bundle",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/explorer",
+          "label": "Explore"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). Leonid. https://leonid.heterodata.org.",
+        "llms_txt": true
+      },
+      "title": "Leonid",
+      "display": "leonid.heterodata.org",
+      "url": "https://leonid.heterodata.org",
+      "accent": "#991b1b",
+      "status": "live",
+      "roadmap": true,
+      "tagline": "The two Leonids — Yurovsky's gold-backed chervonets that tamed early-Soviet hyperinflation, and Kantorovich's linear programming and shadow pricing for allocating scarce resources: rational quantitative economic design inside a volatile system.",
+      "pages": [
+        {
+          "label": "Explore",
+          "path": "/explorer"
+        },
+        {
+          "label": "Roadmap",
+          "path": "/roadmap"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        },
+        {
+          "label": "About",
+          "path": "/about"
+        }
+      ]
+    },
+    {
+      "key": "leontief",
+      "cdf": {
+        "provisional": true,
+        "data": {
+          "href": "/downloads/data.zip",
+          "kind": "bundle",
+          "size": null,
+          "formats": [
+            "csv",
+            "parquet"
+          ]
+        },
+        "code": {
+          "href": "/downloads/code.zip",
+          "kind": "bundle",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/studies",
+          "label": "Studies"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). Leontief. https://leontief.heterodata.org.",
+        "llms_txt": true
+      },
+      "title": "Leontief",
+      "display": "leontief.heterodata.org",
+      "url": "https://leontief.heterodata.org",
+      "accent": "#4f46e5",
+      "status": "live",
+      "tagline": "Input-output matrix explorer — compute and inspect the Leontief inverse across sectors.",
+      "pages": [
+        {
+          "label": "Tables",
+          "path": "/tables"
+        },
+        {
+          "label": "Studies",
+          "path": "/studies"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        },
+        {
+          "label": "About",
+          "path": "/about"
+        }
+      ]
+    },
+    {
+      "key": "lewis",
+      "cdf": {
+        "provisional": true,
+        "data": {
+          "href": "/downloads/data.zip",
+          "kind": "bundle",
+          "size": null,
+          "formats": [
+            "csv",
+            "parquet"
+          ]
+        },
+        "code": {
+          "href": "/downloads/code.zip",
+          "kind": "bundle",
+          "langs": [
+            "r",
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/gallery",
+          "label": "Gallery"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). Lewis. https://lewis.heterodata.org.",
+        "llms_txt": true
+      },
+      "title": "Lewis",
+      "display": "lewis.heterodata.org",
+      "url": "https://lewis.heterodata.org",
+      "accent": "#dc2626",
+      "status": "live",
+      "tagline": "International Economics Analysis Platform — balance-of-payments and cross-border value transfer across 258 countries.",
+      "pages": [
+        {
+          "label": "Explore",
+          "path": "/explore"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        },
+        {
+          "label": "Gallery",
+          "path": "/gallery"
+        },
+        {
+          "label": "About",
+          "path": "/about"
+        }
+      ]
+    },
+    {
+      "key": "methodex",
+      "cdf": {
+        "data": {
+          "href": "/download/bundle.zip",
+          "kind": "bundle",
+          "size": "108.5 KB",
+          "formats": [
+            "csv"
+          ],
+          "note": "public-domain US-federal layer only"
+        },
+        "code": {
+          "href": "/download/site_repro.zip",
+          "kind": "bundle",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/docs",
+          "label": "Docs"
+        },
+        "mcp": {
+          "href": "https://mcp.methodex.fyi",
+          "endpoint": "mcp.methodex.fyi",
+          "tools": 13,
+          "transport": "streamable-http",
+          "label": "Agents: connect via MCP"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). Methodex. https://methodex.fyi.",
+        "llms_txt": true
+      },
+      "title": "Methodex",
+      "display": "methodex.fyi",
+      "url": "https://methodex.fyi",
+      "accent": "#7c4dff",
+      "status": "live",
+      "tagline": "A public-domain economic-methodology layer — also an MCP API at mcp.methodex.fyi.",
+      "pages": [
+        {
+          "label": "Explore",
+          "path": "/explore"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        },
+        {
+          "label": "Docs",
+          "path": "/docs"
+        },
+        {
+          "label": "About",
+          "path": "/about"
+        }
+      ]
+    },
+    {
+      "key": "starcruiser",
+      "cdf": {
+        "provisional": false,
+        "data": {
+          "href": "/api/download/bulk/starcruiser_data.zip",
+          "kind": "bundle",
+          "size": "785.8 KB",
+          "formats": [
+            "csv",
+            "xlsx",
+            "parquet"
+          ]
+        },
+        "code": {
+          "href": "/api/code/starcruiser_site_repro.zip",
+          "kind": "bundle",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/studies",
+          "label": "Studies"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). StarCruiser. https://starcruiser.heterodata.org.",
+        "llms_txt": true
+      },
+      "title": "StarCruiser",
+      "display": "starcruiser.heterodata.org",
+      "url": "https://starcruiser.heterodata.org",
+      "accent": "#be185d",
+      "status": "live",
+      "tagline": "U.S. employment-and-inflation explorer on BLS/BEA/Federal-Reserve primary data, read through a heterodox real-competition (Shaikh) lens.",
+      "pages": [
+        {
+          "label": "Explorer",
+          "path": "/explorer"
+        },
+        {
+          "label": "Studies",
+          "path": "/studies"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        },
+        {
+          "label": "About",
+          "path": "/about"
+        }
+      ]
+    },
+    {
+      "key": "shaikh",
+      "cdf": {
+        "provisional": false,
+        "data": {
+          "href": "/api/download/shaikh-data_v2.1.0.zip",
+          "kind": "bundle",
+          "size": "2.0 MB",
+          "formats": [
+            "csv",
+            "xlsx",
+            "parquet"
+          ]
+        },
+        "code": {
+          "href": "https://github.com/andenick",
+          "kind": "repo",
+          "langs": [
+            "python",
+            "r"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/explore",
+          "label": "Explore"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). Shaikh Data. https://shaikh.heterodata.org.",
+        "llms_txt": true
+      },
+      "title": "Shaikh Data",
+      "display": "shaikh.heterodata.org",
+      "url": "https://shaikh.heterodata.org",
+      "accent": "#0d9488",
+      "status": "live",
+      "tagline": "Anu-Viz data hub — RSCD & RMWND economic time series with interactive charts, downloads, and full provenance.",
+      "pages": [
+        {
+          "label": "RSCD — Explore",
+          "path": "/rscd/explore"
+        },
+        {
+          "label": "RSCD — Data",
+          "path": "/rscd/download"
+        },
+        {
+          "label": "RSCD — Code",
+          "path": "/rscd/code"
+        },
+        {
+          "label": "RSCD — About",
+          "path": "/rscd/about"
+        },
+        {
+          "label": "RMWND — Explore",
+          "path": "/rmwnd/explore"
+        },
+        {
+          "label": "RMWND — Data",
+          "path": "/rmwnd/download"
+        }
+      ]
+    }
+  ]
+}

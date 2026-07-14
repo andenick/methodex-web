@@ -1,0 +1,5 @@
+/* Arcanum Site Kit v1.2 — theme: methodex (Methodex)
+   Link AFTER arcanum.css. The ONLY visual override a site needs.
+   --ark-on-accent: white (accent #7c4dff is dark enough). */
+:root{--ark-accent:#7c4dff;--ark-accent-soft:#2b2153;--ark-on-accent:#ffffff;}
+@media (prefers-color-scheme: light){:root{--ark-accent:#7c4dff;--ark-accent-soft:#eae3ff;--ark-on-accent:#ffffff;}}

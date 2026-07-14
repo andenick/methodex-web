@@ -1,0 +1,41 @@
+{
+  "_comment": "Single source of truth for the Universal Graph Contract (DNA WEBSITE_VISUALIZATION_STANDARD). The three chart renderers — ark-plotly.js (browser), ark_plotly_template.py (server/Streamlit), arkChartTheme.ts (React/recharts) — MUST align to these values so 'legend below', margins, colorway, and tooltip are defined exactly once. When you change a value here, update all three renderers (revendor.ps1 then carson-visual verifies propagation). v1.0 2026-06-18.",
+  "version": "1.0",
+  "legend": {
+    "orientation": "h",
+    "x": 0, "xanchor": "left",
+    "y": -0.18, "yanchor": "top",
+    "note": "ALWAYS below the plot — never on top, never overlapping the y-axis label."
+  },
+  "margin": { "l": 60, "r": 20, "t": 16, "b": 44 },
+  "font": { "family": "system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif", "size": 13, "color_token": "--ark-fg" },
+  "backgrounds": { "paper": "rgba(0,0,0,0)", "plot": "rgba(0,0,0,0)" },
+  "axes": {
+    "grid_token": "--ark-line", "zeroline_token": "--ark-line", "line_token": "--ark-line",
+    "tickfont_token": "--ark-fg-dim", "title_font_token": "--ark-fg-dim"
+  },
+  "colorway": {
+    "recipe": "accent-first, then neutral-distinct hues",
+    "accent_token": "--ark-accent",
+    "tail": ["#6b7280", "#0d9488", "#b8860b", "#7c4dff", "#dc2626", "#15803d", "#0891b2"]
+  },
+  "hoverlabel": {
+    "bgcolor_token": "--ark-bg-soft", "bgcolor_fallback_dark": "#161b22", "bgcolor_fallback_light": "#ffffff",
+    "bordercolor_token": "--ark-line", "font_color_token": "--ark-fg",
+    "note": "Tokens fix the white-on-white hover box."
+  },
+  "modebar": {
+    "remove": ["lasso2d", "select2d", "autoScale2d"],
+    "add_download_csv": true,
+    "display": "hover",
+    "displaylogo": false,
+    "toImage": { "format": "png", "scale": 2 }
+  },
+  "title": { "wrap": true, "note": "Render full title responsively; never truncate or bleed outside the box." },
+  "resize": { "debounce_ms": 120, "use_plotly_react": true, "note": "Plotly.react diffs (no ghost trace); ResizeObserver re-fits on container resize." },
+  "layout_rules": {
+    "one_chart_per_row": true,
+    "download_csv_top_right": true,
+    "no_side_by_side": true
+  }
+}
