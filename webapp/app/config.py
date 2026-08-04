@@ -67,7 +67,13 @@ SITE_TITLE: str = "Methodex"
 SITE_TAGLINE: str = "The construction-and-revision history of every economic statistic"
 SITE_HOST: str = os.environ.get("METHODEX_HOST", "methodex.fyi")
 
-# The public-domain layer carved by Technical/campaign/classify_license.py.
+# The public-domain layer. Every record in Technical/campaign/state/ carries a
+# provenance.license assigned upstream during corpus construction; this repo
+# publishes only the records whose license is exactly this value. The filter is
+# enforced in-process and is auditable here: app/services/methodex_service.py
+# (webapp) and src/methodex_mcp.py (MCP server) both drop every document whose
+# provenance.license != PUBLIC_DOMAIN_LICENSE, and every event and statistic
+# whose governing document was dropped.
 PUBLIC_DOMAIN_LICENSE: str = "US-Gov public domain"
 
 # Carson telemetry service name (registry name in usage_events.service).

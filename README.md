@@ -89,7 +89,7 @@ PYTHONPATH="webapp:src" METHODEX_PUBLIC_ONLY=1 \
   gunicorn app.main:app --chdir webapp -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8080
 
 # MCP server
-pip install -r webapp/requirements.txt "mcp>=1.9.0"
+pip install -r webapp/requirements.txt "mcp>=1.9.0,<2"
 PYTHONPATH="src" METHODEX_PUBLIC_ONLY=1 python src/methodex_mcp_http.py
 
 # CLI demo (no server)

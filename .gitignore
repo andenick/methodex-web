@@ -9,6 +9,7 @@ env/
 # Secrets / local config
 .env
 .env.*
+!.env.example
 *.local
 
 # Telemetry (optional first-party analytics; not bundled in this public repo)

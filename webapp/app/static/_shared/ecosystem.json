@@ -1,8 +1,8 @@
 {
-  "_comment": "Canonical Heterodata ecosystem manifest. Single source for the header ecosystem switcher, the heterodata.org hub cards, the nickanderson.us ecosystem section, and the link-graph reciprocity check. SCHEMA v3 (kit v2.0 'Code & Data First'): every site gains a `cdf` block (data/code/outputs targets + site_repo + citation + llms_txt) consumed by ark-triad.js for the Research Triad + Action Footer; see CODE_DATA_FIRST_STANDARD.md §B2.3. cdf targets carrying `provisional:true` are seeded from the campaign §B4 matrix and finalized by each site's design brief; `cdf:null` = intentionally no triad (e.g. externally-owned sites). Additive only — all prior fields unchanged. Kit v1.3 (adds Files site, data.freenic bulk link, scrubbed taglines). Sites: Hub first, then alphabetical by title; each site lists its detailed subpages for the dropdown. A page path may be an absolute URL.",
-  "version": "3.0",
+  "_comment": "Canonical Heterodata ecosystem manifest. Single source for the header ecosystem switcher, the heterodata.org hub cards, and the cross-site link graph. Each site may carry a `cdf` block (data/code/outputs targets + site_repo + citation + llms_txt) consumed by ark-triad.js to render the Research Triad and Action Footer; `cdf: null` means the site intentionally has no triad. Sites are listed hub-first, then alphabetically by title; each lists its subpages for the switcher dropdown. A page path may be an absolute URL. Sites fetch their own vendored copy of this file, so a change here takes effect per-site at that site's next redeploy.",
+  "version": "3.1",
   "kit_version": "2.0",
-  "updated": "2026-07-10",
+  "updated": "2026-07-30",
   "brand": {
     "lead": "Heterodata",
     "tagline": "An Arcanum Research project"
@@ -21,22 +21,89 @@
   },
   "sites": [
     {
-      "key": "foodberg",
+      "key": "nickanderson",
       "cdf": {
-        "provisional": true,
+        "provisional": false,
         "data": {
-          "href": "/downloads/data.zip",
-          "kind": "bundle",
-          "size": null,
+          "href": "https://files.heterodata.org",
+          "kind": "index",
+          "size": "varies by dataset",
           "formats": [
             "csv",
             "xlsx",
+            "parquet",
+            "pdf"
+          ],
+          "note": "Author-anchor site: data lives in the estate file server, not in a per-site bundle."
+        },
+        "code": {
+          "href": "https://github.com/andenick",
+          "kind": "index",
+          "langs": [
+            "r",
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "https://heterodata.org",
+          "label": "Heterodata research hub"
+        },
+        "site_repo": "https://github.com/andenick/nickanderson.us",
+        "citation": "Anderson, N. (2026). Nick Anderson - Economics Research. https://www.nickanderson.us.",
+        "llms_txt": true,
+        "llms_txt_note": "Hand-authored; the site is an ecosystem anchor as well as a sites[] member."
+      },
+      "title": "Nick Anderson",
+      "display": "nickanderson.us",
+      "url": "https://www.nickanderson.us",
+      "accent": "#640000",
+      "status": "live",
+      "anchor_role": "author",
+      "tagline": "Author anchor of the Heterodata ecosystem - public finance, banking and financial history, and the construction of long-run economic data.",
+      "pages": [
+        {
+          "label": "Research",
+          "path": "/research.html"
+        },
+        {
+          "label": "TNSE",
+          "path": "/tnse.html"
+        },
+        {
+          "label": "AI Tools",
+          "path": "/aitools.html"
+        },
+        {
+          "label": "Projects",
+          "path": "/projects.html"
+        },
+        {
+          "label": "Data",
+          "path": "/data.html"
+        },
+        {
+          "label": "About",
+          "path": "/about.html"
+        }
+      ]
+    },
+    {
+      "key": "foodberg",
+      "cdf": {
+        "provisional": false,
+        "data": {
+          "href": "/downloads/foodberg-data.zip",
+          "kind": "bundle",
+          "size": "12 MB",
+          "formats": [
+            "csv",
             "parquet"
           ]
         },
         "code": {
-          "href": "/downloads/code.zip",
-          "kind": "bundle",
+          "href": "https://github.com/andenick/Foodberg",
+          "kind": "repo",
           "langs": [
             "python",
             "typescript"
@@ -44,8 +111,8 @@
           "license": "MIT"
         },
         "outputs": {
-          "href": "/",
-          "label": "Price Explorer"
+          "href": "/explore",
+          "label": "Explore"
         },
         "site_repo": "https://github.com/andenick/Foodberg",
         "citation": "Anderson, N. (2026). Foodberg. https://foodberg.org.",
@@ -75,26 +142,29 @@
     {
       "key": "freenic",
       "cdf": {
-        "provisional": true,
+        "provisional": false,
         "data": {
-          "href": "/downloads/data.zip",
+          "href": "/api/download/bulk/freenic_slice.zip",
           "kind": "bundle",
-          "size": null,
+          "size": "20.8 MB",
           "formats": [
             "csv",
             "parquet"
           ],
+          "dictionary": "/dictionary",
           "bulk": {
             "href": "https://data.freenic.org/",
-            "size": "13 GB",
+            "kind": "bulk",
+            "size": "67 files, 13.9 GiB",
             "label": "Bulk release"
           }
         },
         "code": {
-          "href": "/downloads/code.zip",
+          "href": "/api/code/repro_bundle.zip",
           "kind": "bundle",
           "langs": [
-            "python"
+            "python",
+            "r"
           ],
           "license": "MIT"
         },
@@ -102,7 +172,7 @@
           "href": "/explorer",
           "label": "Explorer"
         },
-        "site_repo": null,
+        "site_repo": "https://github.com/andenick/FreeNIC",
         "citation": "Anderson, N. (2026). FreeNIC. https://freenic.org.",
         "llms_txt": true
       },
@@ -111,7 +181,7 @@
       "url": "https://freenic.org",
       "accent": "#64748b",
       "status": "live",
-      "tagline": "Bank-level U.S. financial-data explorer — failures, FRED series, and active institutions; full 13 GB parquet release at data.freenic.org.",
+      "tagline": "Bank-level U.S. financial-data explorer — failures, FRED series, and active institutions; full 67-file, 13.9 GiB parquet release at data.freenic.org.",
       "pages": [
         {
           "label": "Explore",
@@ -142,12 +212,14 @@
         "data": {
           "href": "/downloads/data.zip",
           "kind": "bundle",
-          "size": "14 MB",
+          "size": "14.1 MB",
           "formats": [
             "csv",
             "xlsx",
             "parquet"
-          ]
+          ],
+          "size_bytes": 14059715,
+          "_size_note": "Generated 2026-08-04 by deploy/pubfin/webapp/data_pipeline/fix_gh1516.py from the TOTAL row of site_data/downloads/BUNDLE_MANIFEST.csv, using check_cdf.py's decimal convention. NEVER typed. Was 14,013,467 bytes after the GH-10 retraction, 14,020,409 after GH-11 and 14,010,943 after GH-12/13/14; the bundle moved to 14059715 bytes when S020 and S022 were rebuilt at their generators and us_government_expenditure's phantom column was dropped (GH-15 / GH-16, with GH-17 units and GH-18 coverage). No dataset was added or removed: 39 parquet / 42 members either side. Tree-verified against the rebaked bundle, NOT live-verified — no box access was attempted."
         },
         "code": {
           "href": "/downloads/code.zip",
@@ -161,7 +233,7 @@
           "href": "/treasury/duration",
           "label": "Duration study (north-star)"
         },
-        "site_repo": null,
+        "site_repo": "https://github.com/andenick/gerhard",
         "citation": "Anderson, N. (2026). Gerhard - The History and Present of American Public Finance. https://gerhard.heterodata.org.",
         "llms_txt": true
       },
@@ -201,31 +273,33 @@
     {
       "key": "hmda",
       "cdf": {
-        "provisional": true,
+        "provisional": false,
         "data": {
-          "href": "/#data",
+          "href": "?view=Data+%26+About",
           "kind": "page",
           "size": null,
           "formats": [
             "csv",
+            "xlsx",
             "parquet"
           ]
         },
         "code": {
-          "href": "/#code",
-          "kind": "page",
+          "href": "https://files.heterodata.org/hmda-processing-code/hmda-processing-pipeline.zip",
+          "kind": "bundle",
           "langs": [
             "python"
           ],
           "license": "MIT"
         },
         "outputs": {
-          "href": "/#explore",
-          "label": "Explore"
+          "href": "?view=Explore",
+          "label": "Explore the dashboard"
         },
-        "site_repo": null,
+        "site_repo": "https://files.heterodata.org/hmda-dashboard-source/hmda-dashboard-source.zip",
         "citation": "Anderson, N. (2026). HMDA Explore. https://hmdaexplore.com.",
-        "llms_txt": true
+        "llms_txt": false,
+        "llms_txt_note": "Bare Streamlit behind the Cloudflare tunnel; enableStaticServing serves only /app/static/*, not root /llms.txt — documented CDF exception (site_docs/hmda.md)."
       },
       "title": "HMDA Explore",
       "display": "hmdaexplore.com",
@@ -271,21 +345,24 @@
       ]
     },
     {
-      "key": "leonid",
+      "key": "vlad",
       "cdf": {
-        "provisional": true,
+        "provisional": false,
         "data": {
-          "href": "/downloads/data.zip",
+          "href": "/api/download/vlad_corpus_inventory.zip",
           "kind": "bundle",
-          "size": null,
+          "size": "5.0 MB",
           "formats": [
             "csv",
             "parquet"
           ],
-          "note": "catalog metadata, not observations"
+          "license": "CC-BY-4.0",
+          "note": "catalog metadata, not observation values",
+          "size_bytes": 4956553,
+          "_size_note": "Generated 2026-07-31 by deploy/vlad/app/build_bundle.py from the TOTAL row of app/data/bundles/BUNDLE_MANIFEST.csv, using check_cdf.py's decimal convention. NEVER typed. Was '3.4 MB' against a 3,415,377-byte bundle built from the 32,179-table slice; the slice was rebuilt 2026-07-31 against the grown Robert database (55,749 tables) and the bundle grew to 4,956,552 bytes. The bundle is byte-reproducible (three consecutive builds agree). Re-derived 2026-08-03 (F1.1): build_slice.py was re-run against the same Robert database and reproduced 55,749 tables / 175 concordances exactly, but exposed a non-deterministic modal-topic tie-break (set iteration under PYTHONHASHSEED) that flipped one concordance row run to run; the tie-break is now alphabetical, concordances_catalog.csv grew 30,023 → 30,028 B and the bundle 4,956,552 → 4,956,553 B, byte-identical across three consecutive builds (sha256 8ecfb604c4c52689c7878479200e171058a5efe7d757f1d1bf1b35fa9ef82389). Tree-verified, NOT live-verified — the box still serves the 32,179-table slice until the F1.1 queue entry ships."
         },
         "code": {
-          "href": "/downloads/code.zip",
+          "href": "/api/code/repro_bundle.zip",
           "kind": "bundle",
           "langs": [
             "python"
@@ -293,20 +370,20 @@
           "license": "MIT"
         },
         "outputs": {
-          "href": "/explorer",
-          "label": "Explore"
+          "href": "/charts",
+          "label": "Charts"
         },
-        "site_repo": null,
-        "citation": "Anderson, N. (2026). Leonid. https://leonid.heterodata.org.",
+        "site_repo": "https://github.com/andenick/vlad-web",
+        "citation": "Anderson, N. (2026). Vlad. https://vlad.heterodata.org.",
         "llms_txt": true
       },
-      "title": "Leonid",
-      "display": "leonid.heterodata.org",
-      "url": "https://leonid.heterodata.org",
+      "title": "Vlad",
+      "display": "vlad.heterodata.org",
+      "url": "https://vlad.heterodata.org",
       "accent": "#991b1b",
       "status": "live",
       "roadmap": true,
-      "tagline": "The two Leonids — Yurovsky's gold-backed chervonets that tamed early-Soviet hyperinflation, and Kantorovich's linear programming and shadow pricing for allocating scarce resources: rational quantitative economic design inside a volatile system.",
+      "tagline": "Named for Vladimir Lenin — the great political economist — and Vladimir Voytinsky, the Soviet economist and statistician: Imperial Russian and Soviet official statistics, read from the state's own returns.",
       "pages": [
         {
           "label": "Explore",
@@ -337,21 +414,24 @@
     {
       "key": "leontief",
       "cdf": {
-        "provisional": true,
+        "provisional": false,
         "data": {
-          "href": "/downloads/data.zip",
+          "href": "/api/bulk/all.zip",
           "kind": "bundle",
-          "size": null,
+          "size": "15.0 MB",
           "formats": [
             "csv",
+            "xlsx",
             "parquet"
-          ]
+          ],
+          "license": "CC-BY-4.0"
         },
         "code": {
-          "href": "/downloads/code.zip",
+          "href": "/api/code/bundle.zip",
           "kind": "bundle",
           "langs": [
-            "python"
+            "python",
+            "r"
           ],
           "license": "MIT"
         },
@@ -359,8 +439,8 @@
           "href": "/studies",
           "label": "Studies"
         },
-        "site_repo": null,
-        "citation": "Anderson, N. (2026). Leontief. https://leontief.heterodata.org.",
+        "site_repo": "https://github.com/andenick/leontief",
+        "citation": "Anderson, N. (2026). Leontief: U.S. Input-Output Tables, 1997-2024. https://leontief.heterodata.org.",
         "llms_txt": true
       },
       "title": "Leontief",
@@ -399,30 +479,30 @@
     {
       "key": "lewis",
       "cdf": {
-        "provisional": true,
+        "provisional": false,
         "data": {
-          "href": "/downloads/data.zip",
+          "href": "/api/bulk/all.zip",
           "kind": "bundle",
-          "size": null,
+          "size": "4.2 MB",
           "formats": [
             "csv",
+            "xlsx",
             "parquet"
           ]
         },
         "code": {
-          "href": "/downloads/code.zip",
+          "href": "/api/code/bundle.zip",
           "kind": "bundle",
           "langs": [
-            "r",
             "python"
           ],
           "license": "MIT"
         },
         "outputs": {
-          "href": "/gallery",
-          "label": "Gallery"
+          "href": "/fof/return-reversal",
+          "label": "Return Reversal"
         },
-        "site_repo": null,
+        "site_repo": "https://github.com/andenick/lewis",
         "citation": "Anderson, N. (2026). Lewis. https://lewis.heterodata.org.",
         "llms_txt": true
       },
@@ -431,7 +511,7 @@
       "url": "https://lewis.heterodata.org",
       "accent": "#dc2626",
       "status": "live",
-      "tagline": "International Economics Analysis Platform — balance-of-payments and cross-border value transfer across 258 countries.",
+      "tagline": "International Economics Analysis Platform — balance-of-payments and cross-border value transfer across 220 economies, with trade profiles for 214 countries.",
       "pages": [
         {
           "label": "Explore",
@@ -490,7 +570,7 @@
           "transport": "streamable-http",
           "label": "Agents: connect via MCP"
         },
-        "site_repo": null,
+        "site_repo": "https://github.com/andenick/methodex-web",
         "citation": "Anderson, N. (2026). Methodex. https://methodex.fyi.",
         "llms_txt": true
       },
@@ -528,13 +608,19 @@
       ]
     },
     {
-      "key": "starcruiser",
+      "key": "myrdal",
+      "title": "Myrdal",
+      "display": "myrdal.heterodata.org",
+      "url": "https://myrdal.heterodata.org",
+      "accent": "#1d4ed8",
+      "status": "live",
+      "tagline": "Population as a cause of economic outcomes - long-run world population, the demographic transition, US county age structure and nativity, and internal migration flows, from named public statistical sources.",
       "cdf": {
-        "provisional": false,
+        "provisional": true,
         "data": {
-          "href": "/api/download/bulk/starcruiser_data.zip",
+          "href": "/downloads/myrdal_data.zip",
           "kind": "bundle",
-          "size": "785.8 KB",
+          "size": "37.4 MB",
           "formats": [
             "csv",
             "xlsx",
@@ -542,7 +628,161 @@
           ]
         },
         "code": {
-          "href": "/api/code/starcruiser_site_repro.zip",
+          "href": "/downloads/myrdal_code.zip",
+          "kind": "bundle",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/explore",
+          "label": "Population explorer"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). Myrdal - Demography & Migration. https://myrdal.heterodata.org.",
+        "llms_txt": true
+      },
+      "pages": [
+        {
+          "label": "Explore",
+          "path": "/explore"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        },
+        {
+          "label": "About",
+          "path": "/about"
+        }
+      ]
+    },
+    {
+      "accent": "#8b1a1a",
+      "cdf": {
+        "provisional": true,
+        "data": {
+          "href": "/data",
+          "kind": "page",
+          "formats": [
+            "csv"
+          ],
+          "license": "CC-BY-4.0",
+          "note": "20 race-economy CSVs + data dictionary + citation record",
+          "dictionary": "/data/files/data_dictionary.csv"
+        },
+        "code": {
+          "href": "https://github.com/andenick/race-web",
+          "kind": "repo",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/explore",
+          "label": "Explore the series"
+        },
+        "site_repo": "https://github.com/andenick/race-web",
+        "citation": "Anderson, N. (2026). DuBois. https://race.heterodata.org.",
+        "llms_txt": true
+      },
+      "display": "race.heterodata.org",
+      "key": "race",
+      "pages": [
+        {
+          "label": "Wealth Gap",
+          "path": "/wealth-gap"
+        },
+        {
+          "label": "Employment",
+          "path": "/employment"
+        },
+        {
+          "label": "Criminal Justice",
+          "path": "/criminal-justice"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        }
+      ],
+      "status": "live",
+      "tagline": "Race, stratification and economic disparities in the United States across six measurable dimensions — wealth, income, employment, poverty, housing, and criminal justice — reconstructed from authoritative public sources.",
+      "title": "DuBois",
+      "url": "https://race.heterodata.org"
+    },
+    {
+      "key": "gordon",
+      "cdf": {
+        "provisional": false,
+        "data": [
+          {
+            "href": "/api/download/bulk/gordon_data.zip",
+            "kind": "bundle",
+            "size": "785.8 KB",
+            "formats": [
+              "csv",
+              "xlsx",
+              "parquet"
+            ]
+          },
+          {
+            "href": "/api/prices/download",
+            "kind": "item-ledger slice behind /prices - select with ?item=&areas=",
+            "formats": [
+              "csv",
+              "parquet"
+            ]
+          },
+          {
+            "href": "/api/labor/download",
+            "kind": "local-labor-market slice behind /labor - select with ?measure=&geographies=",
+            "formats": [
+              "csv",
+              "parquet"
+            ]
+          },
+          {
+            "href": "/api/pricemap/levels/download",
+            "kind": "price-map dollar-level slice behind /pricemap - select with ?item=&areas=",
+            "formats": [
+              "csv",
+              "parquet"
+            ]
+          },
+          {
+            "href": "/api/pricemap/costmap/download",
+            "kind": "price-map metropolitan cost-map slice behind /pricemap - select with ?measure=&areas=",
+            "formats": [
+              "csv",
+              "parquet"
+            ]
+          },
+          {
+            "href": "/api/pricemap/wholesale/download",
+            "kind": "price-map daily wholesale slice behind /pricemap - select with ?commodity=&package=&cities=",
+            "formats": [
+              "csv",
+              "parquet"
+            ]
+          }
+        ],
+        "code": {
+          "href": "/api/code/gordon_site_repro.zip",
           "kind": "bundle",
           "langs": [
             "python"
@@ -553,17 +793,29 @@
           "href": "/studies",
           "label": "Studies"
         },
-        "site_repo": null,
-        "citation": "Anderson, N. (2026). StarCruiser. https://starcruiser.heterodata.org.",
+        "site_repo": "https://github.com/andenick/gordon-web",
+        "citation": "Anderson, N. (2026). Gordon. https://gordon.heterodata.org.",
         "llms_txt": true
       },
-      "title": "StarCruiser",
-      "display": "starcruiser.heterodata.org",
-      "url": "https://starcruiser.heterodata.org",
+      "title": "Gordon",
+      "display": "gordon.heterodata.org",
+      "url": "https://gordon.heterodata.org",
       "accent": "#be185d",
       "status": "live",
-      "tagline": "U.S. employment-and-inflation explorer on BLS/BEA/Federal-Reserve primary data, read through a heterodox real-competition (Shaikh) lens.",
+      "tagline": "Gordon - U.S. employment-and-inflation explorer on BLS/BEA/Federal-Reserve primary data, read through a heterodox real-competition (Shaikh) lens. Named for Robert J., David M. and Margaret S. Gordon, who worked on how inflation and employment are measured.",
       "pages": [
+        {
+          "label": "Prices",
+          "path": "/prices"
+        },
+        {
+          "label": "Price map",
+          "path": "/pricemap"
+        },
+        {
+          "label": "Labor",
+          "path": "/labor"
+        },
         {
           "label": "Explorer",
           "path": "/explorer"
@@ -651,6 +903,144 @@
         {
           "label": "RMWND — Data",
           "path": "/rmwnd/download"
+        }
+      ]
+    },
+    {
+      "key": "erwin",
+      "title": "Erwin",
+      "display": "erwin.heterodata.org",
+      "url": "https://erwin.heterodata.org",
+      "accent": "#4b5320",
+      "status": "live",
+      "tagline": "Military spending as an endogenous feature of capitalism — US defense spending, cross-country military expenditure (SIPRI), NATO burden-sharing, the arms industry, and defense employment.",
+      "cdf": {
+        "data": {
+          "href": "/downloads/data.zip",
+          "kind": "bundle",
+          "formats": [
+            "csv",
+            "parquet",
+            "zip"
+          ],
+          "size": "15.6 MB",
+          "size_bytes": 15625125,
+          "note": "325 published series; 324 as per-series CSV + Parquet, plus a full data dictionary and a provenance record. One zip.",
+          "dictionary": "/downloads/data_dictionary.csv",
+          "bundle_manifest": "/downloads/BUNDLE_MANIFEST.csv",
+          "page": "/data",
+          "_size_note": "Corrected 2026-08-04 (N2.1) from the stale 15537057/'328 series' entry. Derived, never typed: bundle rebuilt in verification from fixed sources 2026-08-04 = 15,625,125 bytes / 654 members / sha256 cb11334e..., byte-identical data to the shipped bundle (only the registry date line differs). Live truth since the 2026-08-03 quarantine ship: 325 published series / 324 CSV+Parquet / 16 categories. See queue_entries_N12.md."
+        },
+        "code": {
+          "href": "https://github.com/andenick/erwin-web",
+          "kind": "repo",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/explore",
+          "label": "Defense-spending explorer"
+        },
+        "site_repo": "https://github.com/andenick/erwin-web",
+        "citation": "Anderson, N. (2026). Erwin - Defense Economics. https://erwin.heterodata.org.",
+        "llms_txt": true,
+        "_href_note": "2026-07-29: data.href pointed back at the real bulk bundle route /downloads/data.zip. Earlier that day it had been demoted to the /data page because /downloads/data.zip had NO route handler in the app and returned 404. app/downloads.py now serves it from the mounted package and the route was VERIFIED BY REQUEST (200, 15724695 bytes) - not by reading this manifest. `size` and `size_bytes` are the bundle's EXACT on-disk size, equal to the TOTAL row of bundles/data/BUNDLE_MANIFEST.csv; check_cdf.py check (e) compares any on-page data-cdf-size against that row, and a typed size label that drifts is the methodex defect. Re-run tools/build_bundle.py then tools/build_web_manifest.py --with-bundle and update these two numbers together whenever the data changes. 2026-07-30: the three upstream data defects were fixed at source (D276-D280 units millions_usd not billions_usd and renamed to the whole BEA table they actually contain; SIPRI Top-100 arms_revenue re-extracted from the correct year-matched column; XS012/XS013 quarantined because the SIPRI source publishes no profit or employment column in any year). Published series 330 -> 328, per-series downloads 329 -> 327, bundle 15,724,695 -> 15,537,057 bytes / 664 -> 660 members. Size and note above updated together; VERIFIED BY REQUEST against the rebuilt deployment, not by reading this manifest."
+      },
+      "pages": [
+        {
+          "label": "Explore",
+          "path": "/explore"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        },
+        {
+          "label": "About",
+          "path": "/about"
+        }
+      ]
+    },
+    {
+      "key": "volcker",
+      "title": "Volcker",
+      "display": "volcker.org",
+      "url": "https://volcker.org",
+      "accent": "#b8860b",
+      "status": "live",
+      "tagline": "A comparative empirical test of 11 theories of banking against 161 years of US banking data, run through Anwar Shaikh's real-competition framework.",
+      "cdf": {
+        "provisional": true,
+        "data": {
+          "href": "/api/download/bulk/volcker_data.zip",
+          "kind": "bundle",
+          "formats": [
+            "csv",
+            "png",
+            "zip"
+          ],
+          "size": "364.7 KB",
+          "size_bytes": 364653,
+          "note": "A compact derived-artifact showcase, not the research corpus: the Study 12 series dictionary, Study 13 dimension coverage, classifier F1 and feature importance, plus four figures. The harmonised US panels, the international panel, the manuscript chapters and the extracted document knowledge base are deliberately NOT shipped.",
+          "page": "/data"
+        },
+        "code": {
+          "href": "/api/code/repro_bundle.zip",
+          "kind": "bundle",
+          "langs": [
+            "python"
+          ],
+          "license": "MIT"
+        },
+        "outputs": {
+          "href": "/studies",
+          "label": "The 11 studies"
+        },
+        "site_repo": null,
+        "citation": "Anderson, N. (2026). Volcker - Comparative Empirical Testing of Theories of Banking. https://volcker.org.",
+        "llms_txt": false,
+        "llms_txt_note": "No /llms.txt route exists; VERIFIED 404 on 2026-07-30 both in-container and at https://volcker.org/llms.txt. Do not flip this to true until the route is actually served.",
+        "_href_note": "2026-07-30 (D-23): entry added on ratification. Every field here was VERIFIED BY REQUEST against the running volcker-web container, not read off a document. The two bundle routes returned 200 at 364653 and 391037 bytes exactly; `size` is human_size(364653) in check_cdf.py's DECIMAL (1000-based) convention = 364.7 KB — the binary 356.1 KB would fail check (e). `provisional: true` because volcker ships NO Research Triad: ark-triad.js is not vendored in app/static/_shared/, there is no triad partial, and footer.html carries no [data-cdf-*] hooks — so this cdf block is currently declarative only and reveals nothing on the site until a triad is wired. Note site_docs/volcker.md records the volcker CDF REDESIGN as Part 2, gated on E-4 (keep-and-redesign / keep-frozen / retire); this manifest entry is the ratified D-23 step and does not pre-empt that decision. site_repo is null: repo_registry.json v4.6 carries volcker-dissertation and volcker-rotation-package, both PRIVATE, and there is no volcker tree under PublicRepos/.",
+        "_pages_note": "Volcker's real nav is 8 items; the landing 'Overview' -> / is omitted here because this field feeds the switcher's SUBpage dropdown and the site's own switcher link already points at /. 'Resources' is volcker-only vocabulary (every other site uses Explore/Data/Code/Methodology/About) and is listed as the nav really labels it. /study/12 and /study/13 are live routes but are NOT in the nav, so they are not listed."
+      },
+      "pages": [
+        {
+          "label": "Studies",
+          "path": "/studies"
+        },
+        {
+          "label": "Explore",
+          "path": "/explorer"
+        },
+        {
+          "label": "Data",
+          "path": "/data"
+        },
+        {
+          "label": "Resources",
+          "path": "/resources"
+        },
+        {
+          "label": "Code",
+          "path": "/code"
+        },
+        {
+          "label": "Methodology",
+          "path": "/methodology"
+        },
+        {
+          "label": "About",
+          "path": "/about"
         }
       ]
     }

@@ -1,0 +1,25 @@
+# Methodex build context exclusions (shared by Dockerfile.web and Dockerfile.mcp).
+#
+# The Dockerfiles COPY only named subtrees today, so nothing below would reach an
+# image anyway — but that is an accident of the current COPY lines, not a
+# guarantee. One `COPY . /app` and any of these would ship. Keep the guard
+# structural.
+**/__pycache__
+**/*.pyc
+**/*.bak-*
+docker-compose.yml
+docker-compose.yml.bak-*
+
+# Deploy-root documents that describe the build environment rather than the
+# service. They are not part of this repository, but the rule keeps them out of
+# the image if a deploy tree is ever used as the build context.
+DPR.md
+RECONCILIATION_*.md
+_mcp_probe.py
+
+# `COPY Technical/campaign/state` must carry only the four corpus files the
+# service actually reads (methodology_documents.json, revision_events.json,
+# statistics.json, measures.json) — never the build scripts or the campaign
+# state that sit beside them in a working tree.
+Technical/campaign/state/**/*.py
+Technical/campaign/state/campaign_state.json

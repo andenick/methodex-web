@@ -19,9 +19,23 @@ WORKDIR /app
 # carson-telemetry (first-party analytics) is OPTIONAL and not bundled in this
 # public repo; build without it and add only the MCP SDK.
 COPY webapp/requirements.txt /app/webapp/requirements.txt
+# PIN THE MAJOR, and resolve it in ONE pip pass.
+#   * `mcp>=1.9.0` is unbounded: a rebuild can resolve to a new major version
+#     that moves or removes `mcp.server.fastmcp.FastMCP` — the exact symbol
+#     src/methodex_mcp_http.py imports — and the container then crash-loops
+#     with a message that reads as "not installed" when it is installed, at a
+#     major version whose API this code does not speak. Raise the bound
+#     deliberately, with a test, not incidentally on the next rebuild.
+#   * Installing mcp in its OWN pip invocation lets pip resolve it in isolation,
+#     blind to the fastapi/starlette pair already pinned by requirements.txt,
+#     and leaves the image permanently `pip check`-dirty. Resolving mcp in the
+#     SAME invocation makes pip backtrack instead.
+# `pip check` then fails the BUILD on a broken dependency graph: a green build
+# is not a working container, but a build that cannot satisfy its own package
+# metadata is guaranteed not to be one.
 RUN grep -v '^carson-telemetry' /app/webapp/requirements.txt > /tmp/req.txt && \
-    pip install --no-cache-dir -r /tmp/req.txt && \
-    pip install --no-cache-dir "mcp>=1.9.0"
+    pip install --no-cache-dir -r /tmp/req.txt "mcp>=1.9.0,<2" && \
+    pip check
 
 # Canonical tool module + HTTP entrypoint + public-domain state.
 # methodex_mcp.py resolves its state dir relative to itself (../Technical/campaign/state).
